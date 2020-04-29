@@ -201,22 +201,23 @@ let arr = [1,9,3];
 
 // compose
 
-function compose(xs){
-    let hi = function hello(){
-        return "hi: " + name
-        
-    }
-    let addit = function add(thing){
-        return thing.toUpperCase() + "!"
-        
-    }
-    function final(){
-        console.log(hi + addit)
-    }
-    final()
-}
+// function compose(statement, name){
+//     function hello(){
+//         let wow = statement;
+//         wow.toString()
+//         function wowzer(){
+//             return name.toUpperCase();
+//         }
+//         function see(){
+//             wow.split('')
+//             console.log(wow[3])
+//             return wow +' ' + wowzer() +"!"
+//         }
+//         return see()
+//     }
+    
+//     console.log(hello())
+// }
 
-compose("austen")
-
-
+// compose("you are the best","insert name here")
 
