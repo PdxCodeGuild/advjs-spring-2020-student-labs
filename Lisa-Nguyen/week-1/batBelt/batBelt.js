@@ -18,7 +18,7 @@ function double(x) {
 function map(xs, fn) {
     ys = []
 
-    xs.forEach(function(x){
+    xs.each(function(x){
        ys.push(double(x))
     })
 
@@ -35,7 +35,7 @@ function isOdd(x) {
   function filter(xs, predicate) {
     const filtered = []
     
-    xs.forEach(function (x) {
+    xs.each(function (x) {
       if (predicate(x)) {
         filtered.push(x)
       }
