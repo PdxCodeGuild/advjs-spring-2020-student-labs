@@ -10,12 +10,11 @@ function each(xs, fn) {
 
 each(xs, console.log)
 
-// maps
+// map
 function double(x) {
   return x * 2
 }
 
-// map
 function map(xs, fn) {
     ys = []
 
