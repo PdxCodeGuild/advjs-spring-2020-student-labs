@@ -1,7 +1,10 @@
+// Demo: https://repl.it/@lisaofalltrades/lab-02-batbelt
+
 // sample array
 xs = [1, 2, 3, 4, 5]
-
+console.log(`Original Array: ${xs}`)
 // each
+console.log("\nEach")
 function each(xs, fn) {
     for (let i = 0; i < xs.length; i++) {
        fn(xs[i], i, xs)
@@ -11,6 +14,7 @@ function each(xs, fn) {
 each(xs, console.log)
 
 // map
+console.log("\nMap")
 function double(x) {
   return x * 2
 }
@@ -18,29 +22,30 @@ function double(x) {
 function map(xs, fn) {
     ys = []
 
-    xs.each(function(x){
+    each(xs, function(x){
        ys.push(double(x))
     })
 
     return ys
    }
 
-map(xs, double)
+console.log(map(xs, double))
 
 // filter
+console.log("\nFilter")
 function isOdd(x) {
-    return x% 2 === 1
+    return x % 2 === 1
   }
   
-  function filter(xs, predicate) {
-    const filtered = []
+function filter(xs, predicate) {
+  const filtered = []
     
-    xs.each(function (x) {
-      if (predicate(x)) {
-        filtered.push(x)
-      }
-    })
-    return filtered
-  }
+  each(xs, function (x) {
+    if (predicate(x)) {
+      filtered.push(x)
+    }
+  })
+  return filtered
+}
   
-  filter(xs, isOdd)
+console.log(filter(xs, isOdd))
