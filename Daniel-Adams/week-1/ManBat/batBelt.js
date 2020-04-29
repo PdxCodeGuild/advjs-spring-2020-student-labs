@@ -4,9 +4,11 @@ function each(input, fn) {
     }
 };
 
-function map(j, fn) {
-    nums = j.each
-    for (let i = 0; i<nums; ++i) {
-        fn(nums[i])
+function map(input, fn) {
+    mapped = [];
+    for (let i = 0; i<input.length; ++i) {
+        mappedResult = fn(input[i]),
+        mapped.push(mappedResult);
     }
+    return mapped
 };
