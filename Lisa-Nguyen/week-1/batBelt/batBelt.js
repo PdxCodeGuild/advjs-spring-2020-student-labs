@@ -9,3 +9,21 @@ function each(xs, fn) {
    }
 
 each(xs, console.log)
+
+// filter
+function isOdd(x) {
+    return x% 2 === 1
+  }
+  
+  function filter(xs, predicate) {
+    const filtered = []
+    
+    xs.forEach(function (x) {
+      if (predicate(x)) {
+        filtered.push(x)
+      }
+    })
+    return filtered
+  }
+  
+  filter(xs, isOdd)
