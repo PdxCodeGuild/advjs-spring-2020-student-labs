@@ -1,3 +1,6 @@
+// automated tests
+
+
 // //_.each
 // console.log("hello")
 let arr = [1,9,3];
@@ -56,7 +59,18 @@ let arr = [1,9,3];
 // filter([1,2,3,5], function(x){
 // })
 
+// function filter(xs, predicate) {
+//         const filtered = []
+//         xs.forEach(function (x){
+//                 if (predicate(x)) {
+//                         filtered.push(x)
+//                 }
+//         })
+//         console.log(filtered)
+//         // return filtered
+// }
 
+// filter()
 //find
 
 // function find(arr, fn){
@@ -77,6 +91,18 @@ let arr = [1,9,3];
 // find([1,3,3,4], function(x){
 // })
 
+// test will look like 
+// desribe("find", function(){
+//         it("should return the first element that passes predicate", function(){
+//                 function greaterThan5(x) {return x > 5}
+//                 expect(_.find([1,2,3,8], greaterThan5)).toEqual(8);
+//                 expect(_.find([3,0,7], greaterThan5)).toEqual(10)
+//         })
+// })
+
+// _.find = function(xs, pred){
+//         // return xs.filter(pred)[0] this is an example of how to use other functions this one takes in filter 
+// }
 // random 
 
 // function random(min, max) {
@@ -109,6 +135,17 @@ let arr = [1,9,3];
 // range(10,20,1)
 
 //extend
+//extend
+// const numbers = {'one' : 1, 'two': 2}
+
+// const bigNumbers = {'one-hundred': 100}
+// //loop over keys in obj
+
+// for (let key in numbers) {
+//     console.log(key)
+// }
+// //or
+// Object.keys(numbers)
 //this one i need help on
 
 // function extend(name, age) {
@@ -161,5 +198,25 @@ let arr = [1,9,3];
 // }
 
 // delay(3000)
+
+// compose
+
+function compose(xs){
+    let hi = function hello(){
+        return "hi: " + name
+        
+    }
+    let addit = function add(thing){
+        return thing.toUpperCase() + "!"
+        
+    }
+    function final(){
+        console.log(hi + addit)
+    }
+    final()
+}
+
+compose("austen")
+
 
 
