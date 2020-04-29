@@ -10,6 +10,24 @@ function each(xs, fn) {
 
 each(xs, console.log)
 
+// maps
+function double(x) {
+  return x * 2
+}
+
+// map
+function map(xs, fn) {
+    ys = []
+
+    xs.forEach(function(x){
+       ys.push(double(x))
+    })
+
+    return ys
+   }
+
+map(xs, double)
+
 // filter
 function isOdd(x) {
     return x% 2 === 1
