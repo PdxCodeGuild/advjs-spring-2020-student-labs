@@ -64,3 +64,14 @@ function composeb(f,g) {
     return g(f(x,y), c);
   }
 }
+
+function limit(fn, n) {
+  let count = 0;
+  return function(x,y) {
+    if (count < n) {
+      count++;
+      return fn(x,y);
+    }
+    return undefined;
+  }
+}
