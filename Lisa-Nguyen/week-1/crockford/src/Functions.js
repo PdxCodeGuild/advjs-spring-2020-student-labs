@@ -46,3 +46,9 @@ function twice(fn){
     return fn(a,a)
   }
 }
+
+function reverse(fn){
+  return function(a,b){
+    return fn(b,a)
+  }
+}
