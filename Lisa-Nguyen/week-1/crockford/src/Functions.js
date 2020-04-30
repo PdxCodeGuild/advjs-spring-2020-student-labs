@@ -58,3 +58,9 @@ function composeu(f,g){
     return g(f(x));
   }
 }
+
+function composeb(f,g) {
+  return function(x,y,c) {
+    return g(f(x,y), c);
+  }
+}
