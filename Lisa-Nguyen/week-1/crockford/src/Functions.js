@@ -25,3 +25,12 @@ function addf(a) {
     return a+b
   }
 }
+
+function liftf(binary) { // should take a binary function
+  // make it callable with two invocations
+  return function(x){ // call 1
+    return function(y){ // call 2
+      return binary(x,y) 
+    }
+  }
+}
