@@ -40,3 +40,9 @@ function curry(fn, a) { // takes a binary function & an argument
    return fn(a,b)
  }; // returns a function that can take a second
 }
+
+function twice(fn){
+  return function(a){
+    return fn(a,a)
+  }
+}
