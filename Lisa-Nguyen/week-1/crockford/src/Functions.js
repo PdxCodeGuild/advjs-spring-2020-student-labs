@@ -26,11 +26,17 @@ function addf(a) {
   }
 }
 
-function liftf(binary) { // should take a binary function
+function liftf(fn) { // should take a binary function
   // make it callable with two invocations
   return function(x){ // call 1
     return function(y){ // call 2
-      return binary(x,y) 
+      return fn(x,y) 
     }
   }
+}
+
+function curry(fn, a) { // takes a binary function & an argument
+ return function(b) {
+   return fn(a,b)
+ }; // returns a function that can take a second
 }
