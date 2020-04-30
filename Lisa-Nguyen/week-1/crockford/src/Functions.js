@@ -52,3 +52,9 @@ function reverse(fn){
     return fn(b,a)
   }
 }
+
+function composeu(f,g){
+  return function(x){
+    return g(f(x));
+  }
+}
