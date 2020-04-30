@@ -147,21 +147,24 @@ let arr = [1,9,3];
 // //or
 // Object.keys(numbers)
 //this one i need help on
+// example done in class:
 
-// function extend(name, age) {
 
-//     name = 
-//     newObj = {}
-//     for (i = 0; i< arr.length; i++){
-//         newObj.push(arr[i])
-//         console.log(newObj)
-//     }
-//     console.log(newObj)
+// for (let key in obj) { //loop over keys
+//     console.log(key)
 // }
+// //or
+// Object.keys(obj) // this returns a array of keys
+// //times
+// const boj = {name: 'moe'}
 
-// extend([{name: 'moe'}, {age: 50}])
-
-//times
+// function extend(dest, src) {
+//     Object.keys(src).forEach(function(key){
+//         dest[key] = src[key]
+//     })//returns a array of keys
+//     return dest;
+// }
+// extend({name: 'moe'}, {age: 50});
 
 // function times(num,fn) {
 //     magicNum = Number(num)
@@ -221,3 +224,6 @@ let arr = [1,9,3];
 
 // compose("you are the best","insert name here")
 
+function add(x,y){
+    return x+y
+}
