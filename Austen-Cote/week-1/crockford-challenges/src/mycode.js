@@ -87,7 +87,74 @@ function from(x){
 function to(gen,endval){
     return function(){
         let x = gen()
-        (x < gen())
+        if (x < endval){
+            return x
+        }
+        // here you can return undefined to explicity state it
+    }
+}
+
+function fromTo(x,y){
+//here we can call from to get a value that will increase by 1
+// then we can call to  to get an to to take in the generator and give it an end value
+    return to(from(x),y)
+}
+
+function element(arr, gen){
+    if (gen === undefined){
+        gen = fromTo(0,arr.length)
+    }
+    return function(){
+        let x = gen()
+        if (x !== undefined){
+            return arr[x]
+        }
+    }
+}
+
+function collect(gen,arr){
+    return function(){
+        let collect = gen()
+       if (collect !== undefined){
+           arr.push(collect)
+       }
+       return collect
+    }
+}
+
+function filter(gen,predicate){
+    return function(){
+        let value;
+        do {
+            value = gen()
+        }
+        while ( 
+            value !== undefined && !predicate(value)
+            )
+            return value 
+    }
+}
+
+function concat(gen1,gen2){
+    return function(){
+        let together = gen1()
+        if (together === undefined){
+            return gen2()
+        }
+        return together
+    }
+}
+
+function repeat(gen){
+        let x = []
+        while (gen() <= x){
+           gen()
+        }
+        return gen()
+}
+
+function gensymf(){
+    return function(){
 
     }
 }
