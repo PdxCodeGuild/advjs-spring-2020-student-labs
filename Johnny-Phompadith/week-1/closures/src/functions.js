@@ -136,7 +136,14 @@ function collect(gen, array) {
 // filter
 function filter(gen, predicate) {
   return function() {
-
+    while (true) {
+      const x = gen()
+      if (x === undefined) {
+        return undefined
+      }
+      if (predicate(x)) {
+        return x
+      }
     }
   }
 }
