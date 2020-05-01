@@ -185,3 +185,20 @@ function revocable(fn){
         }
     }
 }
+
+function exp(value){
+    //check if it is undefined first
+    if (value === undefined){
+        return undefined
+    }
+    //check if the value is a number 
+    if (typeof value === 'number'){
+        return value
+    }
+    //the function calls itself in the function this is how we get the arbutary nesting 
+    return value[0](exp(value[1]),exp(value[2]))
+}
+
+//exp([1]) -> 1
+// exp([add,1,2]) - >
+//exp(1) -> 1
