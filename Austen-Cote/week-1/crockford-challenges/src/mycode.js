@@ -153,8 +153,22 @@ function repeat(gen){
         return gen()
 }
 
-function gensymf(){
+function gensymf(letter){
+    let uniq = from(1)
     return function(){
+        return letter + uniq()
+    }
+}
 
+function counter(count){
+    return {
+        up: function(){
+            count += 1
+            return count 
+        },
+        down: function(){
+            count -= 1
+            return count 
+        }
     }
 }
