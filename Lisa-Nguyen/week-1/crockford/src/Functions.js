@@ -79,6 +79,18 @@ function limit(fn, n) {
 
 function from(n) {
   return function(){
-    return n++
+    return n++;
+  }
+}
+
+function to(fn, n){
+  let count = 1
+  return function(){
+    if (count < n) {
+      n-=1;
+      return fn(n);
+    } else {
+      return undefined;
+    }
   }
 }
