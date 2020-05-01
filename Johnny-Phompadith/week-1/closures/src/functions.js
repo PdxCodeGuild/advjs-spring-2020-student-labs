@@ -155,6 +155,17 @@ function concat(gen1, gen2) {
     if (x === undefined) {
       return gen2()
     }
-      return x
+    return x
   }
+}
+
+// exp
+function exp(valOrArr) {
+  if (valOrArr === undefined) {
+    return undefined
+  }
+  if (typeof valOrArr === 'number') {
+    return valOrArr
+  }
+  return valOrArr[0](exp(valOrArr[1]), exp(valOrArr[2]))
 }
