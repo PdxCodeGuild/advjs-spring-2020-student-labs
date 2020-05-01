@@ -159,6 +159,7 @@ describe("element", function() {
         expect(ele()).toEqual(undefined);
     });
 
+
     it("second argument should be optional. If a generator is not provided, then each of the elements of the array will be produced", function() {
         const ele = element(['a', 'b', 'c', 'd']);
         expect(ele()).toEqual('a');

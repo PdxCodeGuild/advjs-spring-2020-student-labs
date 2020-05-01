@@ -93,8 +93,37 @@ function to(gen, end) {
     }
 };
 
-function fromTo(min, max){
-    return function () {
-
+function fromTo(min, max) {
+    return function() {
+        if (min < max) {
+            return min++
+        }
+        return undefined
     }
+};
+
+
+function element(array,fn){
+    if (fn === undefined){
+        fn = fromTo(0,array.length)
+    }
+    return function () {
+        return array[fn()]
+    }
+};
+
+function collect(fn,array) {
+    return function(){
+        x = fn()
+        if (x !== undefined){
+            array.push(x);
+        }
+        return x
+    }
+};
+
+function filter(gen, pred){
+    return
+
 }
+
