@@ -83,14 +83,37 @@ function from(n) {
   }
 }
 
-function to(fn, n){
-  let count = 1
-  return function(){
-    if (count < n) {
-      n-=1;
-      return fn(n);
-    } else {
-      return undefined;
+// function to(fn, n){
+//   let count = 1;
+//   return function(){
+//     if (count < n) {
+//       n-=1;
+//       return fn(n);
+//     } else {
+//       return undefined;
+//     }
+//   }
+// }
+
+function to(gen, end) {
+  return function() {
+    let value = gen()
+    if (value < end) {
+      return value
     }
+    return undefined
+  }
+}
+
+function fromTo(x, y){
+  return to(from(x),y);
+}
+
+function element(array, gen) {
+  if (gen === undefined) {
+    gen = fromTo(0, array.length)
+  }
+  return function() {
+    return array[gen()]
   }
 }
