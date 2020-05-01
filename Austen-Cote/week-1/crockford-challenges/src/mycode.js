@@ -172,3 +172,16 @@ function counter(count){
         }
     }
 }
+
+function revocable(fn){
+    return {
+        invoke: function(x,y){
+            if (fn !== undefined){
+                return fn(x,y)
+            }
+        },
+        revoke: function(x,y){
+            fn = undefined
+        }
+    }
+}
