@@ -71,7 +71,14 @@ function limit(fn, n) {
     if (count < n) {
       count++;
       return fn(x,y);
+    } else{
+      return undefined;
     }
-    return undefined;
+  }
+}
+
+function from(n) {
+  return function(){
+    return n++
   }
 }
