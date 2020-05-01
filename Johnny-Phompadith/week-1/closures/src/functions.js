@@ -147,3 +147,14 @@ function filter(gen, predicate) {
     }
   }
 }
+
+// concat
+function concat(gen1, gen2) {
+  return function() {
+    const x = gen1()
+    if (x === undefined) {
+      return gen2()
+    }
+      return x
+  }
+}
