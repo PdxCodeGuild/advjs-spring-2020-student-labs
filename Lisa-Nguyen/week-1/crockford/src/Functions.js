@@ -117,3 +117,64 @@ function element(array, gen) {
     return array[gen()]
   }
 }
+
+function collect(gen, array) {
+  return function() {
+    x = gen()
+    if (x !== undefined) {
+      array.push(x)
+    }
+    return x
+  }
+}
+
+// Evan's
+function filter(gen, pred) {
+  return function() {
+    while (true) {
+      const x = gen()
+      if (x === undefined) {
+        return undefined
+      }
+      if (pred(x)) {
+        return x
+      }
+    }
+  }
+}
+
+// Austen's
+function filter(gen,predicate){
+  return function(){
+      let value;
+      do {
+          value = gen()
+      }
+      while (value !== undefined && !predicate(value))
+          return value 
+  }
+}
+
+function concat(gen1, gen2){
+  return function(){
+    x = gen1();
+
+    if (x !== undefined){
+      return x;
+    } else {
+      y = gen2()
+      return y;
+    }
+  }
+}
+
+// try exp function
+
+function exp(arr){
+  return function(){
+    if ((typeof arr[0]) === "function"){
+      fn = arr[0]
+      return fn(arr[1], arr[2])
+    }
+  }
+}
