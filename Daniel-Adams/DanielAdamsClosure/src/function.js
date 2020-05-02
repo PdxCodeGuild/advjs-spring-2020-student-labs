@@ -149,8 +149,12 @@ function concat(gen1, gen2) {
     }
 }
 
-function exp(array) {
-    return function(){
-        
+function exp(valOrArr) {
+    if (valOrArr === undefined) {
+      return undefined
     }
-}
+    if (typeof valOrArr === 'number') {
+      return valOrArr
+    }
+    return valOrArr[0](exp(valOrArr[1]), exp(valOrArr[2]))
+  }
