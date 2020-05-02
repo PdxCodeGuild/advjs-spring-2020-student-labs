@@ -26,7 +26,19 @@ function parallel (tasks, callback) {
 
 // Try to define map using parallel
 function map (collection, iteratee, callback) {
+  let squared = []
 
+  collection.forEach(function(num, err){
+    let result = iteratee(num, callback)
+
+    if (err){
+      return callback(err)
+    } else {
+      squared.push(result);
+
+    }
+    callback(err, squared)
+  })
 }
 
 function waterfall (tasks, callback) {
