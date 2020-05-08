@@ -28,26 +28,33 @@ function formatData (sender, receiver, message) {
 }
 
 // message history
-function messageHistory(file){
-  fs.createReadStream(file)
-  .pipe(csv())
-  .on('data', function (row) {
-    console.log(row);
-    return row
+function messageHistory (file) {
+  console.log("\nMessage history...\n")
+  fs.readFile(file, 'utf8', function (err, data) {
+    if (err) throw err
+    console.log(data);
   })
-  .on('end', function(){
-    console.log('Message history complete.')
-  })
+
+  // fs.createReadStream(file)
+  // .pipe(csv())
+  // .on('data', function (row) {
+  //   console.log(row);
+  //   return row
+  // })
+  // .on('end', function(){
+  //   console.log('Message history complete.')
+  // })
 }
 
 function sendMessage(data){
+  console.log("\nSending message...")
   fs.appendFile(file, data, 'utf8', function(err) {
     if (err) throw err;
-    console.log('Message saved.')
+    //console.log('Message saved.')
   })
 }
 
-//// fake data
+// fake data //
 const characters = ['Harry', 'Ron', 'Hermione', 'Draco', 'Ginny', 'Neville', 'Luna']
 const sender = characters[Math.floor(Math.random() * characters.length)];
 let receiver = characters[Math.floor(Math.random() * characters.length)];
@@ -55,13 +62,11 @@ let receiver = characters[Math.floor(Math.random() * characters.length)];
 while (sender === receiver) {
   receiver = characters[Math.floor(Math.random() * characters.length)];
 }
-////
 
-console.log('Format data...')
 formatData(sender, receiver, "This is a test.")
 
-console.log('Sending message...')
-sendMessage(data)
+// end fake data //
 
-console.log('Message history...')
+sendMessage(data)
 messageHistory(file)
+
