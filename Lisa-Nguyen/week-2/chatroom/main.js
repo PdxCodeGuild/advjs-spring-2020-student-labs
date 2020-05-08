@@ -12,33 +12,14 @@ GET to /messages */
 // Modules
 const fs = require('fs');
 const csv = require('csv-parser');
-// const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 // Variables
 const file = 'messages.csv'
-
-// const csvWriter = createCsvWriter({
-//   path: file,
-//   header: [
-//     { id: 'timestamp', title: 'Timestamp' },
-//     { id: 'sender', title: 'Sender' },
-//     { id: 'receiver', title: 'Receiver' },
-//     { id: 'message', title: 'Message' }
-//   ]
-// });
 
 let data = '';
 
 // functions
 function formatData (sender, receiver, message) {
-  // data = [
-  //   {
-  //     timestamp: Date.now(),
-  //     sender: sender,
-  //     receiver: receiver,
-  //     message: message
-  //   }
-  // ]
   const timestamp = Date.now()
 
   data = ('\n' + timestamp) + ',' + sender + ',' + receiver + ',' + message
@@ -64,11 +45,6 @@ function sendMessage(data){
     if (err) throw err;
     console.log('Message saved.')
   })
-  // csvWriter
-  //   .writeRecords(data)
-  //   .then(function () {
-  //     console.log('Message saved.')
-  //   })
 }
 
 //// fake data
