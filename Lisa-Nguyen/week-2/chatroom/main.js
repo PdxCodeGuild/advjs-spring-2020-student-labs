@@ -11,11 +11,14 @@ GET to /messages */
 
 // Modules
 const fs = require('fs');
-const csv = require('csv-parser');
+const http = require('http');
+const url = require('url')
+
+// files to include
+const funFaker = require('funFaker')
 
 // Variables
 const file = 'messages.csv'
-
 let data = '';
 
 // functions
@@ -27,23 +30,13 @@ function formatData (sender, receiver, message) {
   return data
 }
 
-// message history
+//
 function messageHistory (file) {
   console.log("\nMessage history...\n")
   fs.readFile(file, 'utf8', function (err, data) {
     if (err) throw err
     console.log(data);
   })
-
-  // fs.createReadStream(file)
-  // .pipe(csv())
-  // .on('data', function (row) {
-  //   console.log(row);
-  //   return row
-  // })
-  // .on('end', function(){
-  //   console.log('Message history complete.')
-  // })
 }
 
 function sendMessage(data){
@@ -54,19 +47,26 @@ function sendMessage(data){
   })
 }
 
-// fake data //
-const characters = ['Harry', 'Ron', 'Hermione', 'Draco', 'Ginny', 'Neville', 'Luna']
-const sender = characters[Math.floor(Math.random() * characters.length)];
-let receiver = characters[Math.floor(Math.random() * characters.length)];
+// sendMessage(data)
+// messageHistory(file)
 
-while (sender === receiver) {
-  receiver = characters[Math.floor(Math.random() * characters.length)];
-}
+// http.createServer(function (req, res) {
+//   const urlData = url.parse(req.url, true)
 
-formatData(sender, receiver, "This is a test.")
+//   switch (urlData.pathname) {
+//     case '/newMessage':
+//       sendMessage(data)
+//       break
+//     case '/messages':
+//       messageHistory(file)
+//       break
+//     default:
+//       res.end('unsupported path')
+//   }
+// }).listen(8000)
 
-// end fake data //
 
-sendMessage(data)
-messageHistory(file)
-
+http.createServer(function (req, res) {
+  res.write('Hello World!');
+  res.end();
+}).listen(8080);
