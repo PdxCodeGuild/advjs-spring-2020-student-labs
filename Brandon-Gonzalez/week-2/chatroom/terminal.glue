@@ -1,0 +1,17 @@
+█ [ /home/bgonzalez/Desktop/Advanced/labs/advjs-spring-2020-student-labs/Brandon-Gonzalez/week-2/chatroom ] ls
+chatroom.js
+package.json
+terminal.glue
+
+█ [ /home/bgonzalez/Desktop/Advanced/labs/advjs-spring-2020-student-labs/Brandon-Gonzalez/week-2/chatroom ] curl localhost:8000
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+curl: (7) Failed to connect to localhost port 8000: Connection refused
+
+█ [ /home/bgonzalez/Desktop/Advanced/labs/advjs-spring-2020-student-labs/Brandon-Gonzalez/week-2/chatroom ] node chatroom.js
+/bin/sh: 1: node: not found
+
+█ [ /home/bgonzalez/Desktop/Advanced/labs/advjs-spring-2020-student-labs/Brandon-Gonzalez/week-2/chatroom ] node
+/bin/sh: 1: node: not found
+
