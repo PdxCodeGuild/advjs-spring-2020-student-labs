@@ -3,7 +3,7 @@
 
 // //_.each
 // console.log("hello")
-let arr = [1,9,3];
+// let arr = [1,9,3];
 // for(let i = 0; i < arr.length; i++){
     
 //         // alert(i)
@@ -12,14 +12,14 @@ let arr = [1,9,3];
 // }
 //**or **/
 
-// function each(arr, fn){
-//     for (let i =0; i< arr.length; i++) {
-//         fn(arr[i], i, xs)
-//     }
-// }
-// each([1,9,3], function(x){
-//     console.log(x)
-// })
+function each(arr, fn){
+    for (let i =0; i< arr.length; i++) {
+        fn(arr[i], i, xs)
+    }
+}
+each([1,9,3], function(x){
+    console.log(x)
+})
 
 // //map
 
