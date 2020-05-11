@@ -59,20 +59,33 @@ function extend(source){
   Array.prototype.slice.call(arguments)
   };
   return newList
-
 };
-
-
 // runs the function n times.
-function times(n,fxn){
-  iterations = []
-  for (let i = 0; i < n; i++){
-    iterations.push(fxn)
-
-  };
-  return iterations
+function grantWish(wish) {
+  return wish
 }
-console.log(times(3,function add(a,b){
- return a + b
 
-}))
+function times(n,fxn){
+  results = []
+  for (i=0; i<n; i++){
+    results.push(fxn)
+  }
+  return results
+}
+// console.log(times(4,grantWish('😉')))
+
+//Creates a function that returns the same value that is used as the argument of
+function constant(arg){
+   dict = {
+    value : arg
+  }
+  return dict['value']
+}
+// invokes function after n milliseconds
+// i feel like this was too easy and i wasnt supposed to use set timeout
+function delay(fxn, wait){
+  setTimeout(fxn, wait);
+ }
+
+
+object.keys(src.forEach(funtion(key)
