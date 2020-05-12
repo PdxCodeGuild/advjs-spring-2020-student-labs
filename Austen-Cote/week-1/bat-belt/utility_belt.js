@@ -3,7 +3,7 @@
 
 // //_.each
 // console.log("hello")
-let arr = [1,9,3];
+// let arr = [1,9,3];
 // for(let i = 0; i < arr.length; i++){
     
 //         // alert(i)
@@ -12,14 +12,14 @@ let arr = [1,9,3];
 // }
 //**or **/
 
-// function each(arr, fn){
-//     for (let i =0; i< arr.length; i++) {
-//         fn(arr[i], i, xs)
-//     }
-// }
-// each([1,9,3], function(x){
-//     console.log(x)
-// })
+function each(arr, fn){
+    for (let i =0; i< arr.length; i++) {
+        fn(arr[i], i, xs)
+    }
+}
+each([1,9,3], function(x){
+    console.log(x)
+})
 
 // //map
 
@@ -147,21 +147,24 @@ let arr = [1,9,3];
 // //or
 // Object.keys(numbers)
 //this one i need help on
+// example done in class:
 
-// function extend(name, age) {
 
-//     name = 
-//     newObj = {}
-//     for (i = 0; i< arr.length; i++){
-//         newObj.push(arr[i])
-//         console.log(newObj)
-//     }
-//     console.log(newObj)
+// for (let key in obj) { //loop over keys
+//     console.log(key)
 // }
+// //or
+// Object.keys(obj) // this returns a array of keys
+// //times
+// const boj = {name: 'moe'}
 
-// extend([{name: 'moe'}, {age: 50}])
-
-//times
+// function extend(dest, src) {
+//     Object.keys(src).forEach(function(key){
+//         dest[key] = src[key]
+//     })//returns a array of keys
+//     return dest;
+// }
+// extend({name: 'moe'}, {age: 50});
 
 // function times(num,fn) {
 //     magicNum = Number(num)
@@ -221,3 +224,6 @@ let arr = [1,9,3];
 
 // compose("you are the best","insert name here")
 
+function add(x,y){
+    return x+y
+}

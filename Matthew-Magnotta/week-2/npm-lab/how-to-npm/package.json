@@ -1,0 +1,15 @@
+{
+  "name": "creativename",
+  "version": "1.0.0",
+  "description": "creative description ",
+  "main": "index.js",
+  "repository": "www.goolge.com",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "matty mags",
+  "license": "ISC",
+  "dependencies": {
+    "@linclark/pkg": "^1.0.3"
+  }
+}
