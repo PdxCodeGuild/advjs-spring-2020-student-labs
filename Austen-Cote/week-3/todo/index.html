@@ -5,21 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
 </head>
-<body>
+<body id="body">
   <h1>Simple Todo:</h1>
   <input id="input" type="text" placeholder="What do you need to do?">
-  <input id="submit" type="submit" value="Submit">
+  <input id="submit" type="submit" value="Submit"><br>
+  <input id="compitem" type="submit" value="Compleate Items"><br>
+  <input id="incompitem" type="submit" value="Incomplete Items">
   <h3>Inompleted Items:</h3>
   <div id="todo-incomplete">
+    <ul id="incomplete-ul">
 
+    </ul>
+  </div>
+  <div>
+    <ul id='view'>
+
+    </ul>
   </div>
   <input id="deleteBtn" type="submit" value="Delete">
   <input id="completeBtn" type="submit" value="Completed">
-
-  <div id="todo-complete">
-    <h3>Completed Items:</h3>
-
-  </div>
 
   <script src="bundle.js"></script>
 </body>
