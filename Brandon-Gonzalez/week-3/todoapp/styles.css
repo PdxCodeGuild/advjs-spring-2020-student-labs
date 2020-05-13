@@ -1,0 +1,27 @@
+nav {
+	text-align: center;
+	padding: 20px;
+}
+nav ul{
+	text-decoration: none;
+	list-style: none;
+}
+nav ul li{
+	margin: 20px;
+	display: inline-block;
+}
+button {
+	margin: 5px;
+}
+
+.main-cont {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.todo-view-cont{
+	height: 600px;
+	width: 400px;
+	border: 2px solid black;
+}
