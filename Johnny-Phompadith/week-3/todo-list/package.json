@@ -1,0 +1,17 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "browserify": "^16.5.1",
+    "watchify": "^3.11.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npx watchify src/index.js -o bundle.js --debug --verbose"
+  },
+  "author": "",
+  "license": "ISC"
+}
