@@ -50,3 +50,4 @@ module.exports = {
   filter: filter,
   filterNext: filterNext
 }
+
