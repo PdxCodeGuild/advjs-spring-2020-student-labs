@@ -1,0 +1,16 @@
+{
+  "name": "todo",
+  "version": "1.0.0",
+  "description": "Basic todo list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "npx watchify src/yoyoIndex.js -o bundle.js --debug --verbose"
+  },
+  "author": "notbillmurray",
+  "license": "ISC",
+  "dependencies": {
+    "watchify": "^3.11.1",
+    "yo-yo": "^1.4.1"
+  }
+}
