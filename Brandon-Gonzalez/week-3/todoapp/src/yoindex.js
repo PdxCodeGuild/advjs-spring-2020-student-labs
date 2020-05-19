@@ -1,37 +1,46 @@
 const yo = require('yo-yo')
 
-const todoList = []
-let toDo = addTodo(todoList)
+//gets the input from the form
+const todoText = document.getElementById('add-todo')
 
-function addTodo(todos){
-    return yo`<ul>${todos.map((item,index)=>{
-        return yo`<li><span>"${item.text}"</span></li>`
-    )}
-    </ul>` 
-    
-    })
+//created todolist variable for storage
+const todoList = [
+    {text:"hello", completed:"false"},
+    {text:"hello world", completed:"false"}
+]
+
+const el = createList(todoList);
+const addTo= function (evt){
+    console.log('here')
+    evt.preventDefault()
+    let newText = function () {return todoText.value}
+    const getTo = new Object()
+    getTo.text = newText()
+    getTo.completed = false
+    console.log(getTo)
+    todoList.push(`getTo.text +','+ getTo. )
+    createList(todoList)
 }
 
-        
-        
-//         const yo = require('yo-yo')
-// const todolist = [
-//   { text: 'take out the trash', completed: true },
-//   { text: 'do the dishes', completed: false }
-// ]
-// var el = list(todolist)
-// function list (items) {
-//   return yo`<ul>
-//         ${items.map(function (item, index) {
-//           return yo`<li class=${item.completed ? 'done' : 'todo'}>
-//         <span>${item.text}</span>
-//         ${item.completed ? '' : yo`<button onclick=${() => done(index)}>Done</button>`}
-//         </li>`
-// })}
-// </ul>`
-// }
-// function done (index) {
-//     todolist[index].completed = true
-//     yo.update(el, list(todolist))
-// }
-// document.getElementById('todo-container').appendChild(el)
+const submitbutton = document.getElementById('submitTo');
+submitbutton.addEventListener('click', addTo, false);
+
+//add function. takes the list, maps it, creates elements
+function createList(todoList){
+    return yo`<ul>
+        ${todoList.map((item,index)=> {
+        return yo`<li>
+            <span>${item.text}</span>
+            ${item.completed ? '' : yo`<button onclick=${() => complete(index)}>Complete</button>`}
+         </li>`
+    })}
+    </ul>` 
+}
+
+//completed function. takes the click event and changes the list item to completed.
+function complete(index){
+    todoList[index].completed = true
+    yo.update(el, list(todoList))
+}
+
+document.getElementById('todos').appendChild(el)
