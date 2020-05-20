@@ -1,11 +1,18 @@
-{"text":"Test message to test","date":"2020-5-15 9 0"}
-{"text":"test message the fourth","date":"2020-5-15 9AM 1"}
-{"text":"testing again","date":"2020-5-15 9PM 2"}
-{"text":"test message the fourth","date":"2020-5-15 9PM 3"}
-{"text":"test message the fourth","date":"2020-5-15 9PM 3"}
-{"text":"first message","date":"2020-5-15 14PM"}
-{"text":"Please work","date":"2020-5-15 15PM"}
-{"text":"Please work","date":"2020-5-15 15PM"}
-{"text":"Please work","date":"2020-5-15 9PM 7"}
-{"text":"testing again","date":"2020-5-15 9PM"}
-{"text":"Test message to test","date":"2020-5-15 9PM"}
+{"nickname":"austen","text":"hello you","date":"2020-5-18 3PM","room":"random_humor"}
+{"nickname":"austen","text":"this is a test","date":"2020-5-18 3PM","room":"random_humor"}
+{"nickname":"austen","text":"this is a real test","date":"2020-5-18 3PM","room":"random_humor"}
+{"nickname":"austen","text":"this is a test","date":"2020-5-18 3PM","room":"random_humor"}
+{"nickname":"austen","text":"fafdafda","date":"2020-5-18 3PM","room":"random_humor"}
+{"nickname":"austen","text":"this is a real test","date":"2020-5-18 3PM","room":"work"}
+{"nickname":"Testnick","text":"testing this","date":"2020-5-18 6PM","room":"activities"}
+{"nickname":"Testy Mc Testerson","text":"A long and drawn out message","date":"2020-5-18 7PM","room":"random_humor"}
+{"nickname":"Testy Mc Testerson","text":"test message the fourth","date":"2020-5-18 7PM","room":"activities"}
+{"nickname":"Testy Mc Testerson","text":"Not a real test","date":"2020-5-18 7PM","room":"work"}
+{"nickname":"Testy Mc Testerson","text":"testing this","date":"2020-5-18 7PM","room":"random_humor"}
+{"nickname":"Testy Mc Testerson","text":"testing again","date":"2020-5-18 7PM","room":"work"}
+{"nickname":"Testy Mc Testerson","text":"Wow what a test","date":"2020-5-18 7PM","room":"activities"}
+{"nickname":"Testy Mc Testerson","text":"A test within a test","date":"2020-5-18 8PM","room":"Testroom"}
+{"nickname":"Testy Mc Testerson","text":"another test","date":"2020-5-18 8PM","room":"Testroom"}
+{"nickname":"Testy Mc Testerson","text":"Test message to test","date":"2020-5-18 8PM","room":"random_humor"}
+{"nickname":"Testy Mc Testerson","text":"test message the fourth","date":"2020-5-18 8PM","room":"work"}
+{"nickname":"Testnick","text":"testing again","date":"2020-5-18 9PM","room":"activities"}
