@@ -25,15 +25,37 @@ function getMessages (req, res) {
       .filter(txt => txt) // will filter out empty string
       .map(JSON.parse)
 
-    res.writeHead(200, { 'Content-Type': 'application/json' })
-    res.end(JSON.stringify(messages))
+    res.json(messages)
   })
 }
 
+function postMessage (req, res) {
+  let data = ''
+  req.on('data', function (chunk) {
+    data += chunk
+  })
+
+  req.on('end', function () {
+    // at this point, data should be the entire json payload of the request
+    fs.appendFile(MESSAGES_PATH, '\n' + data, err => {
+      if (err) {
+        res.statusCode = 500
+        return res.end(err)
+      }
+      res.end('Message posted successfully')
+    })
+  })
+}
+
+// ROUTES
 app.get('/', (req, res) => res.send('Hello World!'))
 
 app.get('/messages', (req, res) => {
   getMessages(req, res)
+})
+
+app.post('/messages', (req, res) => {
+  postMessage(req, res)
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
