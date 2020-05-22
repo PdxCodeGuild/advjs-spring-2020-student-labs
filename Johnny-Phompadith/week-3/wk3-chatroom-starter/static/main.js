@@ -1,16 +1,14 @@
 console.log('hello world!')
 var yo = require('yo-yo')
-const viewPost = document.getElementById('viewPost')
-const text = document.getElementById('postChat')
+const text = document.getElementById('postForm')
 const postChat = document.getElementById('postChathtml')
 const subBtn = document.getElementById('submitButton')
+const viewPost = document.getElementById('viewPost')
 
 postChat.onsubmit = function (evt) {
   evt.preventDefault()
   if (text.nodeValue != '') {
     postMessage(text.value)
-    viewPost.appendChild(getMessages())
-    console.log(text)
   } postChat.reset()
 }
 
@@ -35,14 +33,39 @@ function getMessages () {
   fetch('/messages')
     .then(response => response.json())
     .then(data => {
-      data.forEach(element => {
-        let listMsg = document.createElement('li')
-        listMsg.append(element)
-        document.getElementById('viewPost').appendChild(listMsg)
-      })
+        yo.update(el, list(data))
     })
 }
 
-//  postMessage('posting')
+function list (savedMessages) {
+  return yo`<ul>
+  ${savedMessages.map(function (savedMsg) {
+    return yo`<li>${savedMsg}</li>`
+  })}
+  </ul>`
+}
 
+// create element of blank array
+const el = list([])
+// appending to DOM div=id viewPost
+viewPost.appendChild(el)
+
+
+
+// saving username in un
+let un = ''
+function userName () {
+  const span = document.getElementById('user1')
+  userIn = prompt("What is your name?")
+  var textNode = document.createTextNode(userIn)
+  span.appendChild(textNode)
+  console.log(userIn)
+}
+userName()
+
+
+//  postMessage('posting')
 getMessages()
+
+// runs get request timer every 1 sec
+// setInterval(getMessages, 1000)

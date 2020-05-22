@@ -3,6 +3,7 @@ const todos = document.getElementById('todos')
 const all = document.getElementById('all')
 
 all.addEventListener('click', filterTodo)
+
 addTodo.onsubmit = function (evt) {
   evt.preventDefault()
   const text = addTodo.children[0].value
@@ -14,6 +15,7 @@ function createTodo (text) {
   const span = document.createElement('span')
   const btn = document.createElement('button')
   const checkbox = document.createElement('input')
+
   checkbox.type = 'checkbox'
   span.innerHTML = text
   btn.innerHTML = 'Delete'
@@ -21,11 +23,12 @@ function createTodo (text) {
     this.parentNode.parentNode.removeChild(this.parentNode)
   })
   console.log(btn)
+
   todoItem.appendChild(checkbox)
   todoItem.appendChild(span)
   todoItem.appendChild(btn)
   return todoItem
-} 
+}
 
 function filterTodo () {
   console.log(todos.children)

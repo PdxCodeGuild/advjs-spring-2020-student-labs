@@ -38,7 +38,7 @@ function postMessage (req, res) {
     console.log(data)
     // TODO: write code here to add the message to the messages file
 
-    fs.appendFile(MESSAGES_PATH, data + '\n', function (err) {
+    fs.appendFile(MESSAGES_PATH, '\n' + data, function (err) {
       res.end('Error')
     })
 
@@ -59,7 +59,8 @@ function getMessages (req, res) {
       console.log('Error')
       res.end('Error', err)
     } else {
-      let savedMessages = data.toString().split('\n')
+      const savedMessages = data.toString().split('\n')
+      // need to filter and map and parse .filter().map()
       res.writeHead(200, {'Content-Type': 'application/json'})
       res.end(JSON.stringify(savedMessages))
       console.log(savedMessages)
