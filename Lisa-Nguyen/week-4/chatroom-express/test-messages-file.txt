@@ -1,5 +1,8 @@
-{"text":"hello! This is an example message.","room":"Hufflepuff","date":"2020-05-15T02:05:15.596Z"}
+{"text":"hello! This is an example message.","nick":"Luna","room":"Ravenclaw","date":"2020-05-15T02:05:15.596Z"}
 {"text":"This is another message.","room":"Nike","date":"2020-05-15T02:05:15.596Z"}
-{"text":"test post message","date":"2020-05-15T02:05:15.596Z"}
+{"text":"test post message","nick":"johnny","room":"Adidas","date":"2020-05-15T02:05:15.596Z"}
 {"text":"test2","date":"2020-05-15T02:05:15.596Z"}
-{"text":"test 2","nick":"johnny","room":"Nike","date":"2020-05-22T04:09:34.876Z"}
+{"text":"test 2","nick":"johnny","room":"Adidas","room":"Nike","date":"2020-05-22T04:09:34.876Z"}
+{"text":"hello hello hello","nick":"hello","room":"Adidas","date":"2020-05-22T04:10:43.147Z"}
+{"text":"I am a hufflepuff","nick":"Cedrick","room":"Hufflepuff","date":"2020-05-22T04:10:52.826Z"}
+{"text":"i love yeezies","nick":"james","room":"Adidas","date":"2020-05-22T04:13:45.835Z"}
