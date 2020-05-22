@@ -1,28 +1,34 @@
 // Modules
-const path = require('path')
-const express = require('express')
-// initializing an instance of express
-const app = express()
-// define a port
-const port = 3000
+const expressApp = require('express')()
+const fs = require('fs')
 
-app.use(express.static(path.join(__dirname, 'public')))
+// VARIABLES
+const port = 8000
+const MESSAGES_PATH = './test-messages-file.txt'
 
-// ROUTES
+// FUNCTIONS
+function getMessages (req, res) {
+  fs.readFile(MESSAGES_PATH, 'utf8', (err, text) => {
+    if (err) {
+      res.statusCode = 500
+      console.log(err)
+      return res.end('Error reading messages')
+    }
 
-// Root
-// ask for user name
-app.get('/', (req, res) => {
-  res.render('index')
+    const messages = text
+      .split('\n')
+      .filter(txt => txt) // will filter out empty string
+      .map(JSON.parse)
+
+    res.writeHead(200, { 'Content-Type': 'application/json' })
+    res.end(JSON.stringify(messages))
+  })
+}
+
+expressApp.get('/', (req, res) => res.send('Hello World!'))
+
+expressApp.get('/messages', (req, res) => {
+  getMessages(req, res)
 })
 
-// show all messages
-// app.get('/', (req, res) => res.send('Homepage'))
-
-// save a message
-// app.post('/messages', (req, res) => res.send('Root'))
-
-// del a message
-// app.del('/', (req, res) => res.send('Root'))
-
-app.listen(port, () => console.log(`listening on port ${port}`))
+expressApp.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
