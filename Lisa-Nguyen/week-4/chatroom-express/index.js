@@ -1,10 +1,15 @@
 // Modules
-const expressApp = require('express')()
+const express = require('express')
+const app = express()
+const path = require('path')
 const fs = require('fs')
 
 // VARIABLES
 const port = 8000
 const MESSAGES_PATH = './test-messages-file.txt'
+
+// MIDDLEWARE
+app.use(express.static(path.join(__dirname, 'static')))
 
 // FUNCTIONS
 function getMessages (req, res) {
@@ -25,10 +30,10 @@ function getMessages (req, res) {
   })
 }
 
-expressApp.get('/', (req, res) => res.send('Hello World!'))
+app.get('/', (req, res) => res.send('Hello World!'))
 
-expressApp.get('/messages', (req, res) => {
+app.get('/messages', (req, res) => {
   getMessages(req, res)
 })
 
-expressApp.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
