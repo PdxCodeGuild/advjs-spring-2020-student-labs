@@ -19,7 +19,7 @@ theForm.onsubmit = function(evt) {
 //   setTimeout(getMessages(), t)
 // }
 
-var refresh = autoRefresh(10000)
+// var refresh = autoRefresh(10000)
 
 
 function postMessage (text) {
