@@ -21,8 +21,6 @@ theForm.onsubmit = function(evt) {
 
 // var refresh = autoRefresh(10000)
 
-getMessages()
-
 
 function postMessage (text) {
   console.log('posting message')
@@ -54,11 +52,13 @@ function getMessages () {
 function loadMessages (messageArr) {
   console.log(messageArr)
 
-  return yo`<div>
-  ${ messageArr.map((message, index) => {
-    return yo`<div>
-    <span class="message">${message.text}</span><span class="time">${message.date}</span></div>`
-  })}</div>`
+  return yo`<ul>
+  ${messageArr.map((message, index) => {
+    return yo`<li>
+    <span class="message">${message.text}</span><span class="time">${message.date}</span>
+    </li>`
+    
+  })}</ul>`
 }
 
 

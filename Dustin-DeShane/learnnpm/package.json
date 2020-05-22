@@ -1,0 +1,20 @@
+{
+  "name": "@xoda/learnnpm",
+  "version": "1.0.2",
+  "description": "Learning NPM.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "README.md"
+  },
+  "keywords": [
+    "learn",
+    "npm"
+  ],
+  "author": "dustin deshane",
+  "license": "ISC",
+  "dependencies": {}
+}
