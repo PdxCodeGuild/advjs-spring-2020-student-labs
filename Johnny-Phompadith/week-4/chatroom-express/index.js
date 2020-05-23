@@ -3,6 +3,8 @@ const express = require('express')
 const app = express()
 const path = require('path')
 const fs = require('fs')
+const http = require('http').createServer(app)
+const io = require('socket.io')(http)
 
 // VARIABLES
 const port = 8000
@@ -12,6 +14,14 @@ const MESSAGES_PATH = './test-messages-file.txt'
 app.use(express.static(path.join(__dirname, 'static')))
 
 // FUNCTIONS
+
+io.on('connection', (socket) => {
+  console.log('a user connected')
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg)
+  })
+})
+
 function getMessages (req, res) {
   fs.readFile(MESSAGES_PATH, 'utf8', (err, text) => {
     if (err) {
@@ -58,4 +68,4 @@ app.post('/messages', (req, res) => {
   postMessage(req, res)
 })
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+http.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
