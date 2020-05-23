@@ -39,23 +39,23 @@ function getMessages (req, res) {
   })
 }
 
-function postMessage (req, res) {
-  let data = ''
-  req.on('data', function (chunk) {
-    data += chunk
-  })
+// function postMessage (req, res) {
+//   let data = ''
+//   req.on('data', function (chunk) {
+//     data += chunk
+//   })
 
-  req.on('end', function () {
-    // at this point, data should be the entire json payload of the request
-    fs.appendFile(MESSAGES_PATH, '\n' + data, err => {
-      if (err) {
-        res.statusCode = 500
-        return res.end(err)
-      }
-      res.end('Message posted successfully')
-    })
-  })
-}
+//   req.on('end', function () {
+//     // at this point, data should be the entire json payload of the request
+//     fs.appendFile(MESSAGES_PATH, '\n' + data, err => {
+//       if (err) {
+//         res.statusCode = 500
+//         return res.end(err)
+//       }
+//       res.end('Message posted successfully')
+//     })
+//   })
+// }
 
 // ROUTES
 app.get('/', (req, res) => res.send('Hello World!'))

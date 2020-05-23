@@ -34,4 +34,4 @@ const el = Chat(state.messages, state.room, updateState)
 const chatContainer = document.getElementById('chat-container')
 chatContainer.appendChild(el)
 
-setInterval(refresh, 500)
+// setInterval(refresh, 500)
