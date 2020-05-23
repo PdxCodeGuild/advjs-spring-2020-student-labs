@@ -15,3 +15,5 @@
 {"text":"test","nick":"Superman","room":"","date":"2020-05-23T01:25:25.544Z"}
 {"text":"check","nick":"Superman","room":"Nike","date":"2020-05-23T01:26:03.552Z"}
 {"text":"check","nick":"batman","room":"Nike","date":"2020-05-23T01:26:08.982Z"}
+{"text":"hello batman","nick":"Superman","room":"","date":"2020-05-23T01:37:51.866Z"}
+{"text":"im superman","nick":"Superman","room":"","date":"2020-05-23T01:38:10.330Z"}
