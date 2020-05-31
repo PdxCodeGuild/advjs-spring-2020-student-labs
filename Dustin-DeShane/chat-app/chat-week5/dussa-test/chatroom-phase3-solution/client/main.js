@@ -26,7 +26,7 @@ const state = {
 
 function updateState (key, value) {
   state[key] = value
-  yo.update(el, Chat(state.messages, state.room, updateState))
+  // yo.update(el, Chat(state.messages, state.room, updateState))
 }
 
 const el = Chat(state.messages, state.room, updateState)

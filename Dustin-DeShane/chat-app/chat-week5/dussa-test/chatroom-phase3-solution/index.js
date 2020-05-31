@@ -1,5 +1,5 @@
 const port = 8000
-const MESSAGES_PATH = './messages.txt'
+const MESSAGES_PATH = './dussa-test-chat/src/test-messages-file.json'
 
 const app = require('./app')({ messagesPath: MESSAGES_PATH })
 

@@ -1,14 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import './index.css'
+import App from './App'
+import io from 'socket.io-client'
+import messageList from './test-messages-file.json'
 
-const msgList = [
-  { text: 'hello! This is an example message.', date: '2020-05-15T02:05:15.596Z' },
-  { text: 'This is another message.', date: '2020-05-15T02:05:15.596Z' },
-  { text: 'test post message', date: '2020-05-15T02:05:15.596Z' },
-  { text: 'test2', date: '2020-05-15T02:05:15.596Z' }
-]
+const socket = io()
+const nickname = prompt('Enter your nickname:')
+
+socket.on('chat message', msg => {
+  console.log('Got a message:', msg)
+})
+
+const sendForm = document.getElementById('send-message')
+const messageTextField = document.getElementById('message-text')
+
+sendForm.onsubmit = evt => {
+  evt.preventDefault()
+  const message = { text: messageTextField.value, nick: nickname, date: new Date() }
+  // const message = { text: messageTextField.value, nick: nickname, room: state.room, date: new Date() }
+  socket.emit('chat message', message)
+}
 
 function ShowMessages ({messages}) {
   return (
@@ -23,6 +35,6 @@ function ShowMessages ({messages}) {
 }
 
 ReactDOM.render(
-  <ShowMessages messages={msgList} />,
+  <ShowMessages messages={[messageList]} />,
   document.getElementById('root')
 )
