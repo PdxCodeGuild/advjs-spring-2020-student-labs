@@ -1,6 +1,5 @@
 import React from 'react'
 import './App.css'
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,14 +26,14 @@ function App () {
         </nav>
 
         <Switch>
-          <Route path='/'>
-            <All />
-          </Route>
           <Route path='/incomplete'>
             <Incomplete />
           </Route>
           <Route path='/completed'>
             <Completed />
+          </Route>
+          <Route path='/'>
+            <All />
           </Route>
         </Switch>
       </div>
