@@ -1,9 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
 
 const io = require('socket.io-client')
 const socket = io()
+
 
 socket.on('chat message', msg => {
   console.log('Got a message:', msg)
