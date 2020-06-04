@@ -1,3 +1,7 @@
+body {
+  padding: 50px;
+  background-color: hsl(0, 0%, 96%);
+}
 .App {
   text-align: center;
 }
@@ -35,4 +39,53 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.cardFrame {
+  background-color: #fff;
+  border-radius: 6px;
+  box-shadow: 0 0.5em 1em -0.125em rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.02);
+  color: #4a4a4a;
+  display: block;
+  padding: 1.25rem;
+  margin-bottom: 10px;
+}
+
+.button {
+  border-color: transparent;
+  color: #fff;
+  margin-bottom: .5rem;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+  border-width: 1px;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: 1rem;
+  height: 2.5em;
+  line-height: 1.5;
+  position: relative;
+  vertical-align: top;
+  user-select: none;
+}
+
+.done {
+  background-color: #48c774;
+}
+
+.del {
+  background-color: #ef2e55;
+}
+
+.submit {
+  background-color: #3298dc;
 }

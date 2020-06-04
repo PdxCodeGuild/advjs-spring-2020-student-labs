@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -26,11 +27,11 @@ const Task = ({ text }) => {
   )
 }
 
-const completedBooks = taskList.filter(function (task) {
+const completedTasks = taskList.filter(function (task) {
   return task.completed === true
 })
 
-const incompletedBooks = taskList.filter(function (task) {
+const incompletedTasks = taskList.filter(function (task) {
   return task.completed === false
 })
 
@@ -54,10 +55,10 @@ function App () {
 
         <Switch>
           <Route path='/incomplete'>
-            <Incomplete tasks={incompletedBooks} />
+            <Incomplete tasks={incompletedTasks} />
           </Route>
           <Route path='/completed'>
-            <Completed tasks={completedBooks} />
+            <Completed tasks={completedTasks} />
           </Route>
           <Route path='/'>
             <All tasks={taskList} />
@@ -72,10 +73,14 @@ function All ({ tasks }) {
   return (
     <div>
       <h2>All Tasks</h2>
-      {tasks.map(
-        (task, i) =>
-          <Task key={i} text={task.text} />
-      )}
+      <ul>
+        {tasks.map((task, i) =>
+          <li key={i} className='cardFrame'>
+            <Task key={i} text={task.text} />
+            <button className='button del'>Delete</button>
+          </li>
+        )}
+      </ul>
     </div>
   )
 }
@@ -84,15 +89,16 @@ function Incomplete ({ tasks }) {
   return (
     <div>
       <h2>Incompleted Tasks</h2>
-      <p>
+      <ul>
         {tasks.map(
           (task, i) =>
-            <li key={i}>
+            <li key={i} className='cardFrame'>
               <Task text={task.text} />
-              <button>Done</button>
+              <button className='button done'>Done</button>
+              <button className='button del'>Delete</button>
             </li>
         )}
-      </p>
+      </ul>
     </div>
   )
 }
@@ -101,10 +107,15 @@ function Completed ({ tasks }) {
   return (
     <div>
       <h2>Completed Tasks</h2>
-      {tasks.map(
-        (task, i) =>
-          <Task key={i} text={task.text} />
-      )}
+      <ul>
+        {tasks.map(
+          (task, i) =>
+            <li key={i} className='cardFrame'>
+              <Task key={i} text={task.text} />
+              <button className='button del'>Delete</button>
+            </li>
+        )}
+      </ul>
     </div>
   )
 }

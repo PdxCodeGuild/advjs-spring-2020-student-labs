@@ -12,7 +12,7 @@ class SubmitForm extends React.Component {
           className='input'
           placeholder='Enter Item'
         />
-        <button className='button'>Submit</button>
+        <button className='button submit'>Submit</button>
       </form>
     ) // end return
   } // end render
@@ -20,8 +20,8 @@ class SubmitForm extends React.Component {
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />,
     <SubmitForm />
+    <App />,
   </React.StrictMode>,
   document.getElementById('root')
 )
