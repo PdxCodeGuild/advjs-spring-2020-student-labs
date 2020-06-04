@@ -13,7 +13,9 @@ const taskList = [
   { text: 'Wash the dishes', completed: false },
   { text: 'Make rice', completed: true },
   { text: 'make non-toxic cleaner', completed: true },
-  { text: 'laundry', completed: false }
+  { text: 'laundry', completed: false },
+  { text: 'hang curtain rods', completed: false },
+  { text: 'mount bathroom hooks', completed: false }
 ]
 
 const Task = ({ text }) => {
