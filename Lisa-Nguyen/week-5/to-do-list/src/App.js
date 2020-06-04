@@ -7,6 +7,31 @@ import {
   Link
 } from 'react-router-dom'
 
+const taskList = [
+  { text: 'Take out the trash', completed: true },
+  { text: 'Walk the dog', completed: true },
+  { text: 'Wash the dishes', completed: false },
+  { text: 'Make rice', completed: true },
+  { text: 'make non-toxic cleaner', completed: true },
+  { text: 'laundry', completed: false }
+]
+
+const Task = ({ text }) => {
+  return (
+    <div>
+      <p>{text}</p>
+    </div>
+  )
+}
+
+const completedBooks = taskList.filter(function (task) {
+  return task.completed === true
+})
+
+const incompletedBooks = taskList.filter(function (task) {
+  return task.completed === false
+})
+
 function App () {
   return (
     <Router>
@@ -27,13 +52,13 @@ function App () {
 
         <Switch>
           <Route path='/incomplete'>
-            <Incomplete />
+            <Incomplete tasks={incompletedBooks} />
           </Route>
           <Route path='/completed'>
-            <Completed />
+            <Completed tasks={completedBooks} />
           </Route>
           <Route path='/'>
-            <All />
+            <All tasks={taskList} />
           </Route>
         </Switch>
       </div>
@@ -41,16 +66,40 @@ function App () {
   )
 }
 
-function All () {
-  return <h2>All Tasks</h2>
+function All ({ tasks }) {
+  return (
+    <div>
+      <h2>All Tasks</h2>
+      {tasks.map(
+        (task, i) =>
+          <Task key={i} text={task.text} />
+      )}
+    </div>
+  )
 }
 
-function Incomplete () {
-  return <h2>Incompleted Tasks</h2>
+function Incomplete ({ tasks }) {
+  return (
+    <div>
+      <h2>Incompleted Tasks</h2>
+      {tasks.map(
+        (task, i) =>
+          <Task key={i} text={task.text} />
+      )}
+    </div>
+  )
 }
 
-function Completed () {
-  return <h2>Completed Tasks</h2>
+function Completed ({ tasks }) {
+  return (
+    <div>
+      <h2>Completed Tasks</h2>
+      {tasks.map(
+       (task, i) =>
+          <Task key={i} text={task.text} />
+      )}
+    </div>
+  )
 }
 
 export default App
