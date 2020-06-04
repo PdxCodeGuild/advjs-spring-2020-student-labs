@@ -35,6 +35,7 @@ class App extends React.Component {
   }
 
   render () {
+    const { taskList } = this.state
     return (
       <Router>
         <div>
@@ -54,13 +55,13 @@ class App extends React.Component {
 
           <Switch>
             <Route path='/incomplete'>
-              <Incomplete taskList={this.state.taskList} />
+              <Incomplete taskList={taskList} />
             </Route>
             <Route path='/completed'>
-              <Completed taskList={this.state.taskList} />
+              <Completed taskList={taskList} />
             </Route>
             <Route path='/'>
-              <All taskList={this.state.taskList} />
+              <All taskList={taskList} />
             </Route>
           </Switch>
         </div>
