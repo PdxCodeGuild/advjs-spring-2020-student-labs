@@ -8,92 +8,97 @@ import {
   Link
 } from 'react-router-dom'
 
-const taskList = [
-  { text: 'Take out the trash', completed: true },
-  { text: 'Walk the dog', completed: true },
-  { text: 'Wash the dishes', completed: false },
-  { text: 'Make rice', completed: true },
-  { text: 'make non-toxic cleaner', completed: true },
-  { text: 'laundry', completed: false },
-  { text: 'hang curtain rods', completed: false },
-  { text: 'mount bathroom hooks', completed: false }
-]
-
-const Task = ({ text }) => {
+const Task = ({ text, status }) => {
   return (
     <>
-      <p>{text}</p>
+      <p>Task: {text}</p>
+      <p>Completed: {status}</p>
     </>
   )
 }
 
-const completedTasks = taskList.filter(function (task) {
-  return task.completed === true
-})
+class App extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      taskList: [
+        { text: 'Take out the trash', completed: true },
+        { text: 'Walk the dog', completed: true },
+        { text: 'Wash the dishes', completed: false },
+        { text: 'Make rice', completed: true },
+        { text: 'make non-toxic cleaner', completed: true },
+        { text: 'laundry', completed: false },
+        { text: 'hang curtain rods', completed: false },
+        { text: 'mount bathroom hooks', completed: false }
+      ]
+    }
+  }
 
-const incompletedTasks = taskList.filter(function (task) {
-  return task.completed === false
-})
+  render () {
+    return (
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to='/'>All Tasks</Link>
+              </li>
+              <li>
+                <Link to='/incomplete'>Incompleted Tasks</Link>
+              </li>
+              <li>
+                <Link to='/completed'>Completed Tasks</Link>
+              </li>
+            </ul>
+          </nav>
 
-function App () {
-  return (
-    <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to='/'>All Tasks</Link>
-            </li>
-            <li>
-              <Link to='/incomplete'>Incompleted Tasks</Link>
-            </li>
-            <li>
-              <Link to='/completed'>Completed Tasks</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Switch>
-          <Route path='/incomplete'>
-            <Incomplete tasks={incompletedTasks} />
-          </Route>
-          <Route path='/completed'>
-            <Completed tasks={completedTasks} />
-          </Route>
-          <Route path='/'>
-            <All tasks={taskList} />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  )
+          <Switch>
+            <Route path='/incomplete'>
+              <Incomplete taskList={this.state.taskList} />
+            </Route>
+            <Route path='/completed'>
+              <Completed taskList={this.state.taskList} />
+            </Route>
+            <Route path='/'>
+              <All taskList={this.state.taskList} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    )
+  }
 }
 
-function All ({ tasks }) {
+function All ({ taskList }) {
   return (
     <div>
       <h2>All Tasks</h2>
       <ul>
-        {tasks.map((task, i) =>
-          <li key={i} className='cardFrame'>
-            <Task key={i} text={task.text} />
-            <button className='button del'>Delete</button>
-          </li>
+        {taskList.map(
+          (task, i) =>
+            <li key={i} className='cardFrame'>
+              <Task text={task.text} status={(task.completed.toString())} />
+              <button className='button del'>Delete</button>
+            </li>
         )}
       </ul>
     </div>
   )
 }
 
-function Incomplete ({ tasks }) {
+function Incomplete ({ taskList }) {
+  const incompletedTasks = taskList.filter(function (task) {
+    return task.completed === false
+  })
+
   return (
     <div>
       <h2>Incompleted Tasks</h2>
       <ul>
-        {tasks.map(
+        {incompletedTasks.map(
           (task, i) =>
             <li key={i} className='cardFrame'>
-              <Task text={task.text} />
+              <Task text={task.text} status={(task.completed.toString())} />
               <button className='button done'>Done</button>
               <button className='button del'>Delete</button>
             </li>
@@ -103,15 +108,19 @@ function Incomplete ({ tasks }) {
   )
 }
 
-function Completed ({ tasks }) {
+function Completed ({ taskList }) {
+  const completedTasks = taskList.filter(function (task) {
+    return task.completed === true
+  })
+
   return (
     <div>
       <h2>Completed Tasks</h2>
       <ul>
-        {tasks.map(
+        {completedTasks.map(
           (task, i) =>
             <li key={i} className='cardFrame'>
-              <Task key={i} text={task.text} />
+              <Task text={task.text} status={(task.completed.toString())} />
               <button className='button del'>Delete</button>
             </li>
         )}
