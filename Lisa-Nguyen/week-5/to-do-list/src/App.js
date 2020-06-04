@@ -18,9 +18,9 @@ const taskList = [
 
 const Task = ({ text }) => {
   return (
-    <div>
+    <>
       <p>{text}</p>
-    </div>
+    </>
   )
 }
 
@@ -82,10 +82,15 @@ function Incomplete ({ tasks }) {
   return (
     <div>
       <h2>Incompleted Tasks</h2>
-      {tasks.map(
-        (task, i) =>
-          <Task key={i} text={task.text} />
-      )}
+      <p>
+        {tasks.map(
+          (task, i) =>
+            <li key={i}>
+              <Task text={task.text} />
+              <button>Done</button>
+            </li>
+        )}
+      </p>
     </div>
   )
 }
@@ -95,7 +100,7 @@ function Completed ({ tasks }) {
     <div>
       <h2>Completed Tasks</h2>
       {tasks.map(
-       (task, i) =>
+        (task, i) =>
           <Task key={i} text={task.text} />
       )}
     </div>
