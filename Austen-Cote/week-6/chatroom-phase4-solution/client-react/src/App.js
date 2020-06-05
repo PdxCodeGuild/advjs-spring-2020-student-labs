@@ -19,7 +19,7 @@ class App extends React.Component {
     this.state = {
       messages: [],
       nick: '',
-      room: 'general',
+      room: '',
       formValue: ''
     }
   }
@@ -54,10 +54,11 @@ class App extends React.Component {
     this.setState({ room: room })
   }
 
-  handleChangeRoom (evt) {
-    const room = evt.target.value
-    this.setState({ room: room })
-  }
+  // handleChangeRoom (evt) {
+  //   const room = evt.target.value
+  //   //new way will be history.push()
+  //   this.setState({ room: room })
+  // }
 
   handleLogin (evt) {
     evt.preventDefault()
@@ -112,9 +113,7 @@ class App extends React.Component {
                 room={this.state.room}
                 rooms={this.getRooms()}
                 handleAddRoom={this.handleAddRoom.bind(this)}
-                handleChangeRoom={this.handleChangeRoom.bind(this)}
               />
-              <Chat messages={this.state.messages} room={this.state.room} />
             </Route>
             <Route path='/login'>
               {/* <Done /> */}
@@ -136,3 +135,6 @@ class App extends React.Component {
 }
 
 export default App
+
+
+// <Chat messages={this.state.messages} room={this.state.room} />

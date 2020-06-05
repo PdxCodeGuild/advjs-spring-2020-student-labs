@@ -1,4 +1,7 @@
 import React from 'react'
+import {
+  useParams
+} from 'react-router-dom'
 
 function Message (props) {
   return <li className='message-item'>
@@ -9,9 +12,10 @@ function Message (props) {
 }
 
 export default function Chat (props) {
+  const { room } = useParams()
   return <div id='chatroom'>
     <ul id='messages'>
-      {props.messages.filter(msg => msg.room === props.room).map((msg, i) => <Message message={msg} key={i} />)}
+      {props.messages.filter(msg => msg.room === room).map((msg, i) => <Message message={msg} key={i} />)}
     </ul>
   </div>
 }
