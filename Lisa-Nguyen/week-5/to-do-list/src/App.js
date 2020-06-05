@@ -48,6 +48,13 @@ class App extends React.Component {
         { text: 'mount bathroom hooks', completed: false }
       ]
     }
+    this.toggleComplete = this.toggleComplete.bind(this) // makes "this" accessible to the togglComplete method
+  }
+
+  toggleComplete () {
+    this.setState({
+      completed: !this.state.open // makes the value opposite
+    })
   }
 
   render () {
