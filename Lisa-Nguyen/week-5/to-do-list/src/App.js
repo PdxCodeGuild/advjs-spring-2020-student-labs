@@ -17,9 +17,25 @@ const Task = ({ text, status }) => {
   )
 }
 
+const DelBtn = () => {
+  return (
+    <>
+      <button className='button del'>Delete</button>
+    </>
+  )
+}
+
+const DoneBtn = () => {
+  return (
+    <>
+      <button className='button done'>Done</button>
+    </>
+  )
+}
+
 class App extends React.Component {
   constructor (props) {
-    super(props)
+    super(props) // creates a new instance of this class
     this.state = {
       taskList: [
         { text: 'Take out the trash', completed: true },
@@ -79,7 +95,7 @@ function All ({ taskList }) {
           (task, i) =>
             <li key={i} className='cardFrame'>
               <Task text={task.text} status={(task.completed.toString())} />
-              <button className='button del'>Delete</button>
+              {task.completed ? <DelBtn /> : <DoneBtn />}
             </li>
         )}
       </ul>
@@ -100,8 +116,8 @@ function Incomplete ({ taskList }) {
           (task, i) =>
             <li key={i} className='cardFrame'>
               <Task text={task.text} status={(task.completed.toString())} />
-              <button className='button done'>Done</button>
-              <button className='button del'>Delete</button>
+              <DoneBtn />
+              <DelBtn />
             </li>
         )}
       </ul>
@@ -122,7 +138,7 @@ function Completed ({ taskList }) {
           (task, i) =>
             <li key={i} className='cardFrame'>
               <Task text={task.text} status={(task.completed.toString())} />
-              <button className='button del'>Delete</button>
+              <DelBtn />
             </li>
         )}
       </ul>
