@@ -1,0 +1,7 @@
+button.yes {
+  display: none;
+}
+
+button.no {
+  display: block;
+}
