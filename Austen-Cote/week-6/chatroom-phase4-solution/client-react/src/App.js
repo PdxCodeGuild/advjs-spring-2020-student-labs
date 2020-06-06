@@ -2,6 +2,7 @@
 import Chat from './chat'
 import Rooms from './rooms'
 import Home from './home'
+import Signup from './signup'
 import React from 'react'
 import io from 'socket.io-client'
 import {
@@ -20,7 +21,8 @@ class App extends React.Component {
       messages: [],
       nick: '',
       room: '',
-      formValue: ''
+      formValue: '',
+      loggedIn: false
     }
   }
 
@@ -39,8 +41,6 @@ class App extends React.Component {
       })
   }
 
-
-
   handleAddRoom () {
     const room = prompt('Enter a room name')
     this.setState({ room: room })
@@ -56,17 +56,12 @@ class App extends React.Component {
     evt.preventDefault()
     const nick = document.getElementById('nickname').value
     console.log(nick, 'this is the nickname')
-    this.setState({ nick: nick })
+    this.setState({ nick: nick, loggedIn: true })
   }
 
   // handleChangeHomeFormInput (event) {
   //   this.setState({ nick: event.target.value })
   // }
-  
-    
-   
-  
-
   getRooms () {
     const rooms = this.state.messages.map(msg => msg.room)
     rooms.push(this.state.room) // we have to add the currentRoom to the list, otherwise it won't be an option if there isn't already a message with that room
@@ -86,15 +81,8 @@ class App extends React.Component {
               {/* <li>
                 <Link to='/rooms'>Room</Link>
               </li> */}
-              <li>
-                <Link to='/login'>Login</Link>
-              </li>
-              <li>
-                <Link to='/logout'>Logout</Link>
-              </li>
-              <li>
-                <Link to='/signup'>Signup</Link>
-              </li>
+              {this.state.loggedIn ? null : <li><Link to='/login'>Login</Link></li>}
+              {this.state.loggedIn ? <li><Link to='/logout'>Logout</Link></li> : <li><Link to='/signup'>Sign up</Link></li>}
             </ul>
           </nav>
 
@@ -103,16 +91,15 @@ class App extends React.Component {
               <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} nick={this.state.nick} />
             </Route>
             <Route path='/login'>
-              {/* <Done /> */}
+              <Home onHandle={this.handleLogin.bind(this)} />
             </Route>
             <Route path='/logout'>
-              {/* <All /> */}
             </Route>
             <Route path='/signup'>
-              {/* <All /> */}
+              <Signup onHandle={this.handleLogin.bind(this)} />
+
             </Route>
             <Route path='/'>
-              <Home onHandle={this.handleLogin.bind(this)} />
               <Rooms
                 nick={this.state.nick}
                 room={this.state.room}
