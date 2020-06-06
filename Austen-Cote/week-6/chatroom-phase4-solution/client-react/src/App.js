@@ -39,15 +39,7 @@ class App extends React.Component {
       })
   }
 
-  sendMessage (evt) {
-    evt.preventDefault()
-    const message = { text: this.state.formValue, nick: this.props.nick, room: this.state.room, date: new Date() }
-    socket.emit('chat message', message)
-  }
 
-  handleChangeFormInput (event) {
-    this.setState({ formValue: event.target.value })
-  }
 
   handleAddRoom () {
     const room = prompt('Enter a room name')
@@ -70,6 +62,10 @@ class App extends React.Component {
   // handleChangeHomeFormInput (event) {
   //   this.setState({ nick: event.target.value })
   // }
+  
+    
+   
+  
 
   getRooms () {
     const rooms = this.state.messages.map(msg => msg.room)
@@ -87,9 +83,9 @@ class App extends React.Component {
               <li>
                 <Link to='/'>Home</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link to='/rooms'>Room</Link>
-              </li>
+              </li> */}
               <li>
                 <Link to='/login'>Login</Link>
               </li>
@@ -101,19 +97,10 @@ class App extends React.Component {
               </li>
             </ul>
           </nav>
-          <form id='send-message' onSubmit={this.sendMessage.bind(this)}>
-            <input id='message-text' type='text' placeholder='message...' value={this.state.formValue} onChange={this.handleChangeFormInput.bind(this)} />
-            <button type='submit'>Send</button>
-          </form>
 
           <Switch>
-            <Route path='/rooms'>
-              <Rooms
-                nick={this.state.nick}
-                room={this.state.room}
-                rooms={this.getRooms()}
-                handleAddRoom={this.handleAddRoom.bind(this)}
-              />
+            <Route path='/rooms/:room'>
+              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} nick={this.state.nick} />
             </Route>
             <Route path='/login'>
               {/* <Done /> */}
@@ -126,6 +113,12 @@ class App extends React.Component {
             </Route>
             <Route path='/'>
               <Home onHandle={this.handleLogin.bind(this)} />
+              <Rooms
+                nick={this.state.nick}
+                room={this.state.room}
+                rooms={this.getRooms()}
+                handleAddRoom={this.handleAddRoom.bind(this)}
+              />
             </Route>
           </Switch>
         </div>
@@ -137,4 +130,3 @@ class App extends React.Component {
 export default App
 
 
-// <Chat messages={this.state.messages} room={this.state.room} />
