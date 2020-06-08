@@ -10,7 +10,8 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom'
 
 const socket = io()
@@ -74,6 +75,7 @@ class App extends React.Component {
             </Route>
             <Route path='/login'>
               <Home onHandle={this.handleLogin.bind(this)} />
+              {this.state.loggedIn ? <Redirect to='/' /> : null}
             </Route>
             <Route path='/logout'>
               {/* <LoggedOut onHandle = {this.handleLogOut.bind(this)} /> */}
@@ -81,6 +83,7 @@ class App extends React.Component {
             </Route>
             <Route path='/signup'>
               <Signup onHandle={this.handleLogin.bind(this)} />
+              {this.state.loggedIn ? <Redirect to='/' /> : null}
             </Route>
             <Route path='/'>
               <Rooms
