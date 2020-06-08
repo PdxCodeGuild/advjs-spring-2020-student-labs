@@ -14,6 +14,41 @@ import {
 
 const socket = io()
 
+const LoggedInMenu = () => {
+  return (
+    <>
+      <li>
+        <Link to='/'>Back</Link>
+      </li>
+      <li>
+        <Link to='/rooms'>Rooms</Link>
+      </li>
+      <li>
+        <Link to='/logout'>Logout</Link>
+      </li>
+    </>
+  )
+}
+
+const LoggedOutMenu = () => {
+  return (
+    <>
+      <li>
+        <Link to='/'>Home</Link>
+      </li>
+      <li>
+        <Link to='/rooms'>Rooms</Link>
+      </li>
+      <li>
+        <Link to='/login'>Login</Link>
+      </li>
+      <li>
+        <Link to='/signup'>Signup</Link>
+      </li>
+    </>
+  )
+}
+
 class App extends React.Component {
   constructor (props) {
     super(props)
@@ -62,7 +97,7 @@ class App extends React.Component {
   // handleChangeHomeFormInput (event) {
   //   this.setState({ nick: event.target.value })
   // }
-  getRooms () {
+  getRooms() {
     const rooms = this.state.messages.map(msg => msg.room)
     rooms.push(this.state.room) // we have to add the currentRoom to the list, otherwise it won't be an option if there isn't already a message with that room
     const filtered = rooms.filter(room => room) // filter out undefined or empty string
@@ -75,14 +110,7 @@ class App extends React.Component {
         <div>
           <nav>
             <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              {/* <li>
-                <Link to='/rooms'>Room</Link>
-              </li> */}
-              {this.state.loggedIn ? null : <li><Link to='/login'>Login</Link></li>}
-              {this.state.loggedIn ? <li><Link to='/logout'>Logout</Link></li> : <li><Link to='/signup'>Sign up</Link></li>}
+              {this.state.loggedIn ? <LoggedInMenu /> : <LoggedOutMenu />}
             </ul>
           </nav>
 
