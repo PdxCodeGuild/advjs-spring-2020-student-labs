@@ -3,6 +3,7 @@ import Chat from './chat'
 import Rooms from './rooms'
 import Home from './home'
 import Signup from './signup'
+import LoggedOut from './loggedOut'
 import React from 'react'
 import io from 'socket.io-client'
 import {
@@ -13,35 +14,6 @@ import {
 } from 'react-router-dom'
 
 const socket = io()
-
-const LoggedInMenu = () => {
-  return (
-    <>
-      <li>
-        <Link to='/'>Back</Link>
-      </li>
-      <li>
-        <Link to='/logout'>Logout</Link>
-      </li>
-    </>
-  )
-}
-
-const LoggedOutMenu = () => {
-  return (
-    <>
-      <li>
-        <Link to='/'>Home</Link>
-      </li>
-      <li>
-        <Link to='/login'>Login</Link>
-      </li>
-      <li>
-        <Link to='/signup'>Signup</Link>
-      </li>
-    </>
-  )
-}
 
 class App extends React.Component {
   constructor (props) {
@@ -70,12 +42,6 @@ class App extends React.Component {
       })
   }
 
-  // handleChangeRoom (evt) {
-  //   const room = evt.target.value
-  //   //new way will be history.push()
-  //   this.setState({ room: room })
-  // }
-
   handleLogin (evt) {
     evt.preventDefault()
     const nick = document.getElementById('nickname').value
@@ -83,9 +49,10 @@ class App extends React.Component {
     this.setState({ nick: nick, loggedIn: true })
   }
 
-  // handleChangeHomeFormInput (event) {
-  //   this.setState({ nick: event.target.value })
-  // }
+  handleLogOut () {
+    this.setState({ loggedIn: false, nick: '' })
+  }
+
   getRooms() {
     const rooms = this.state.messages.map(msg => msg.room)
     rooms.push(this.state.room) // we have to add the currentRoom to the list, otherwise it won't be an option if there isn't already a message with that room
@@ -98,9 +65,7 @@ class App extends React.Component {
       <Router>
         <div>
           <nav>
-            <ul>
-              {this.state.loggedIn ? <LoggedInMenu /> : <LoggedOutMenu />}
-            </ul>
+              {this.state.loggedIn ? <ul><li><Link to='/'>Back</Link></li><li onClick={this.handleLogOut.bind(this)}><Link to='/logout'>Logout</Link></li></ul> : <ul><li><Link to='/'>Home</Link></li><li><Link to='/login'>Login</Link></li><li><Link to='/signup'>Signup</Link></li></ul> }
           </nav>
 
           <Switch>
@@ -111,13 +76,15 @@ class App extends React.Component {
               <Home onHandle={this.handleLogin.bind(this)} />
             </Route>
             <Route path='/logout'>
+              {/* <LoggedOut onHandle = {this.handleLogOut.bind(this)} /> */}
+              <LoggedOut />
             </Route>
             <Route path='/signup'>
               <Signup onHandle={this.handleLogin.bind(this)} />
-
             </Route>
             <Route path='/'>
               <Rooms
+                loggedIn={this.state.loggedIn}
                 nick={this.state.nick}
                 room={this.state.room}
                 rooms={this.getRooms()}
