@@ -5,14 +5,20 @@ import {
 
 export default function Rooms (props) {
   const history = useHistory()
+
   function handleChangeRoom (evt) {
     const room = evt.target.value
     history.push(`/rooms/${room}`)
     console.log(history, 'this is history')
   }
+  function handleAddRoom () {
+    const room = prompt('Enter a room name')
+    history.push(`/rooms/${room}`)
+  }
+
   return <div id='rooms'>
     <h1>Hi {props.nick}</h1>
-    <button onClick={props.handleAddRoom}>Add Room</button>
+    <button onClick={handleAddRoom}>Add Room</button>
     <label htmlFor='room-select'>Change Room:</label>
     <select onChange={handleChangeRoom} name='room' id='room-select' value={props.room}>
       <option value=''>--Select a Room--</option>

@@ -21,9 +21,6 @@ const LoggedInMenu = () => {
         <Link to='/'>Back</Link>
       </li>
       <li>
-        <Link to='/rooms'>Rooms</Link>
-      </li>
-      <li>
         <Link to='/logout'>Logout</Link>
       </li>
     </>
@@ -35,9 +32,6 @@ const LoggedOutMenu = () => {
     <>
       <li>
         <Link to='/'>Home</Link>
-      </li>
-      <li>
-        <Link to='/rooms'>Rooms</Link>
       </li>
       <li>
         <Link to='/login'>Login</Link>
@@ -74,11 +68,6 @@ class App extends React.Component {
         console.log('fetched data from server')
         this.setState({ messages: data })
       })
-  }
-
-  handleAddRoom () {
-    const room = prompt('Enter a room name')
-    this.setState({ room: room })
   }
 
   // handleChangeRoom (evt) {
@@ -132,7 +121,6 @@ class App extends React.Component {
                 nick={this.state.nick}
                 room={this.state.room}
                 rooms={this.getRooms()}
-                handleAddRoom={this.handleAddRoom.bind(this)}
               />
             </Route>
           </Switch>
