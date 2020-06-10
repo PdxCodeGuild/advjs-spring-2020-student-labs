@@ -1,0 +1,13 @@
+useful curl scripts
+
+// public route
+curl localhost:8000/hello
+
+// protected route
+curl localhost:8000/hello-protected
+
+// login 
+curl -d '{"username":"bobby", "password":"123"}' -H "Content-Type: application/json" -X POST http://localhost:8000/login
+
+// sign-up
+curl -d '{"username":"bob", "password":"123"}' -H "Content-Type: application/json" -X POST http://localhost:8000/sign-up
