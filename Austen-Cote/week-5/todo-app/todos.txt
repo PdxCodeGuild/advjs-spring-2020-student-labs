@@ -1,0 +1,3 @@
+{"item": "wash dishes", "completed": true}
+{"item":"finnish homeowrk","completed":false}
+{"item": "lets test this ", "completed": false}
