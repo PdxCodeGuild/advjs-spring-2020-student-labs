@@ -1,0 +1,19 @@
+{"text":"hello! This is an example message.","date":"2020-05-15T02:05:15.596Z","nick":"ManBat","room":"Mudhole"}
+{"text":"This is another message.","date":"2020-05-15T02:05:15.596Z","nick":"ManBat","room":"Mudhole"}
+{"text":"test post message","date":"2020-05-15T02:05:15.596Z","nick":"ManBat","room":"BatCave"}
+{"text":"test2","date":"2020-05-15T02:05:15.596Z","nick":"ManBat","room":"BatCave"}
+{"text":"Regret life choices","nick":"testing","room":"Mudhole","date":"2020-06-02T04:09:22.247Z"}
+{"text":"Test","nick":"Testing Again","room":"BatCave","date":"2020-06-02T04:11:26.635Z"}
+{"text":"Did that just work","nick":"Testing Again","room":"BatCave","date":"2020-06-02T04:11:36.674Z"}
+{"text":"","nick":"","room":"","date":"2020-06-02T04:32:11.941Z"}
+{"text":"message","nick":null,"room":"","date":"2020-06-03T01:30:27.880Z"}
+{"text":"Testing if this works","nick":"gfdg","room":"Mudhole","date":"2020-06-03T01:34:02.456Z"}
+{"text":"Continue to regret life choices","nick":"gdfsgs","room":"BatCave","date":"2020-06-03T01:37:33.814Z"}
+{"text":"test","nick":"luke","room":"","date":"2020-06-03T01:38:40.417Z"}
+{"text":"new message","nick":"luke","room":"","date":"2020-06-03T01:39:43.328Z"}
+{"text":"test","nick":"luke ","room":"","date":"2020-06-03T01:40:48.834Z"}
+{"text":"","nick":"luke","room":"","date":"2020-06-03T01:58:54.252Z"}
+{"text":"new message in new room","nick":"luke","room":"newRoom","date":"2020-06-03T01:59:14.961Z"}
+{"text":"Regret life choices","nick":"gfu","room":"testroom","date":"2020-06-03T01:59:19.413Z"}
+{"text":"test","nick":"test","room":"","date":"2020-06-03T02:12:24.045Z"}
+{"text":"message","nick":"luke","room":"","date":"2020-06-03T02:34:16.571Z"}
