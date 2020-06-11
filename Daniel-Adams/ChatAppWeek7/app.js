@@ -1,11 +1,15 @@
 module.exports = function (deps) {
   const fs = require('fs')
   const express = require('express')
+  const mongoose = require('mongoose')
+  const morgan = require('morgan')
 
   const app = express()
 
   app.use(express.static('static'))
   app.use(express.json())
+
+  app.use(morgan('tiny'))
 
   app.get('/messages', (req, res) => {
     fs.readFile(deps.messagesPath, 'utf8', (err, text) => {

@@ -9,7 +9,7 @@ export default function Signup (props) {
       <label>Email</label>
       <input type='email' />
       <label>Password</label>
-      <input type='password' />
+      <input id='password' type='password' />
       <input type='submit' value='submit' key='submit' />
     </form>
   </div>
