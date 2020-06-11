@@ -5,9 +5,9 @@ export default function Home (props) {
     <h1>Welcome</h1>
     <form onSubmit={props.onHandle}>
       <label>Username</label>
-      <input type='text' id='nickname' />
+      <input type='text' id='username' />
       <label>Password</label>
-      <input type='password' />
+      <input type='password' id='password' />
       <input type='submit' value='submit' key='submit' />
     </form>
   </div>

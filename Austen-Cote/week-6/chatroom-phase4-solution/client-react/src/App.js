@@ -21,10 +21,12 @@ class App extends React.Component {
     super(props)
     this.state = {
       messages: [],
-      nick: '',
       room: '',
       formValue: '',
-      loggedIn: false
+      loggedIn: false,
+      username: '',
+      password: '',
+      token: ''
     }
   }
 
@@ -45,16 +47,57 @@ class App extends React.Component {
 
   handleLogin (evt) {
     evt.preventDefault()
-    const nick = document.getElementById('nickname').value
-    console.log(nick, 'this is the nickname')
-    this.setState({ nick: nick, loggedIn: true })
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    console.log(username, 'this is the username')
+    this.setState({ username: username, password: password, loggedIn: true })
+
+    fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data, 'this is the data after login')
+        this.setState({ token: data.token })
+      })
+  }
+
+  handleSignUp (evt) {
+    evt.preventDefault()
+    const username = document.getElementById('username').value
+    const password = document.getElementById('password').value
+    console.log(username, 'this is the username')
+    this.setState({ username: username, password: password, loggedIn: true })
+
+    fetch('/sign-up', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password
+      })
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data, 'this is the data after login')
+        this.setState({ token: data.token })
+      })
   }
 
   handleLogOut () {
-    this.setState({ loggedIn: false, nick: '' })
+    this.setState({ loggedIn: false, username: '' })
   }
 
-  getRooms() {
+  getRooms () {
     const rooms = this.state.messages.map(msg => msg.room)
     rooms.push(this.state.room) // we have to add the currentRoom to the list, otherwise it won't be an option if there isn't already a message with that room
     const filtered = rooms.filter(room => room) // filter out undefined or empty string
@@ -66,12 +109,12 @@ class App extends React.Component {
       <Router>
         <div>
           <nav>
-              {this.state.loggedIn ? <ul><li><Link to='/'>Back</Link></li><li onClick={this.handleLogOut.bind(this)}><Link to='/logout'>Logout</Link></li></ul> : <ul><li><Link to='/'>Home</Link></li><li><Link to='/login'>Login</Link></li><li><Link to='/signup'>Signup</Link></li></ul> }
+            {this.state.loggedIn ? <ul><li><Link to='/'>Back</Link></li><li onClick={this.handleLogOut.bind(this)}><Link to='/logout'>Logout</Link></li></ul> : <ul><li><Link to='/'>Home</Link></li><li><Link to='/login'>Login</Link></li><li><Link to='/signup'>Signup</Link></li></ul>}
           </nav>
 
           <Switch>
             <Route path='/rooms/:room'>
-              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} nick={this.state.nick} />
+              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} />
             </Route>
             <Route path='/login'>
               <Home onHandle={this.handleLogin.bind(this)} />
@@ -82,13 +125,13 @@ class App extends React.Component {
               <LoggedOut />
             </Route>
             <Route path='/signup'>
-              <Signup onHandle={this.handleLogin.bind(this)} />
+              <Signup onHandle={this.handleSignUp.bind(this)} />
               {this.state.loggedIn ? <Redirect to='/' /> : null}
             </Route>
             <Route path='/'>
               <Rooms
                 loggedIn={this.state.loggedIn}
-                nick={this.state.nick}
+                username={this.state.username}
                 room={this.state.room}
                 rooms={this.getRooms()}
               />
