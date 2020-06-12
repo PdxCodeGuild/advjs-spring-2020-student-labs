@@ -3,6 +3,7 @@ module.exports = function (deps) {
   const express = require('express')
   const mongoose = require('mongoose')
   const morgan = require('morgan')
+  const AuthController = require('./controllers/auth')
 
   const app = express()
 
@@ -10,6 +11,8 @@ module.exports = function (deps) {
   app.use(express.json())
 
   app.use(morgan('tiny'))
+
+  app.use('/', AuthController)
 
   app.get('/messages', (req, res) => {
     fs.readFile(deps.messagesPath, 'utf8', (err, text) => {
@@ -49,6 +52,31 @@ module.exports = function (deps) {
       console.log('user disconnected')
     })
   })
+
+  // can rename database
+  const connectDatabase = async (databaseName = 'auth-test-1', hostname = 'localhost') => {
+    const database = await mongoose.connect(
+      `mongodb://${hostname}/${databaseName}`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useCreateIndex: true
+      }
+    )
+
+    console.log(`Database connected at mongodb://${hostname}/${databaseName}...`)
+
+    return database
+  }
+
+  const startServer = port => {
+    app.listen(port, async () => {
+      await connectDatabase()
+      console.log(`Server listening on port ${port}...`)
+    })
+  }
+
+  startServer(8001) // quick fix
 
   return http
 }

@@ -1,8 +1,5 @@
 import React from 'react'
 import io from 'socket.io-client'
-// import {
-//   useParams
-// } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 const socket = io()
@@ -10,19 +7,10 @@ const socket = io()
 function Message (props) {
   return <li className='message-item'>
     <span className='date'>{(new Date(props.message.date)).toLocaleString()}</span>
-    <span className='nick'> {props.message.nick}: </span>
+    <span className='nick'> {props.message.username}: </span>
     <span className='text'>{props.message.text}</span>
          </li>
 }
-
-//function component 
-// export default function Chat (props) {
-//   const { room } = useParams()
-//   console.log(room)
-
-// return 
-
-// }
 
 class Chat extends React.Component {
   constructor (props) {
@@ -42,8 +30,8 @@ class Chat extends React.Component {
 
   sendMessage (evt) {
     evt.preventDefault()
-    const message = { text: this.state.formValue, nick: this.props.nick, room: this.state.room, date: new Date() }
-    console.log(message, 'line46')
+    const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date() }
+
     socket.emit('chat message', message)
   }
 
@@ -68,7 +56,3 @@ class Chat extends React.Component {
 }
 
 export default withRouter(Chat)
-// handleChangeFormInput (event) {
-//   console.log(event)
-//   this.setState({ formValue: event.target.value })
-// }

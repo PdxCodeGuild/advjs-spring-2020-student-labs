@@ -38,6 +38,6 @@ userSchema.methods.comparePassword = function (plainText) {
   return bcrypt.compareSync(plainText, this.password)
 }
 
-const User = mongoose.models('User', userSchema)
+const User = mongoose.model('User', userSchema)
 
 module.exports = User

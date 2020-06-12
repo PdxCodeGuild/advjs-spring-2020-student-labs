@@ -48,7 +48,14 @@ class App extends React.Component {
     evt.preventDefault()
     const username = document.getElementById('nickname').value
     const password = document.getElementById('password').value
-    this.setState({ username: username, password: password, loggedIn: true })
+
+    console.log('**user info**', username, password)
+
+    // this.setState({
+    //   username: username,
+    //   password: password,
+    //   loggedIn: true
+    // })
 
     fetch('/signup', {
       method: 'POST',
@@ -56,26 +63,25 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
+        username: username,
+        password: password
       })
     })
-      .then(response => {
-        console.log(response, 'This is the response')
-        response.json()
-      })
+      .then(response => response.json())
       .then(data => {
-        console.log(data)
+        console.log('Data after post:', data)
+        this.setState({
+          username: username,
+          loggedIn: true,
+          token: data.token
+        })
         fetch('/', {
           headers: {
             Authorization: `Bearer ${data.token}`
           }
         })
           .then(response => response.json())
-          .then(data => {
-            console.log(data, 'data after login')
-            this.setState({ token: data.token })
-          })
+          .then(data => console.log(data))
       })
   }
 
@@ -95,12 +101,18 @@ class App extends React.Component {
       <Router>
         <div>
           <nav>
-            {this.state.loggedIn ? <ul><li><Link to='/'>Back</Link></li><li onClick={this.handleLogOut.bind(this)}><Link to='/logout'>Logout</Link></li></ul> : <ul><li><Link to='/'>Home</Link></li><li><Link to='/login'>Login</Link></li><li><Link to='/signup'>Signup</Link></li></ul> }
+            {this.state.loggedIn ? <ul><li><Link to='/'>Back</Link></li><li onClick={this.handleLogOut.bind(this)}><Link to='/logout'>Logout</Link></li></ul> : <ul><li><Link to='/'>Home</Link></li><li><Link to='/login'>Login</Link></li><li><Link to='/signup'>Signup</Link></li></ul>}
           </nav>
 
           <Switch>
             <Route path='/rooms/:room'>
-              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} />
+              <Chat
+                messages={this.state.messages}
+                room={this.state.room}
+                formValue={this.state.formValue}
+                username={this.state.username}
+                token={this.state.token}
+              />
             </Route>
             <Route path='/login'>
               <Home onHandle={this.handleLogin.bind(this)} />
@@ -120,6 +132,7 @@ class App extends React.Component {
                 username={this.state.username}
                 room={this.state.room}
                 rooms={this.getRooms()}
+                token={this.state.token}
               />
             </Route>
           </Switch>
