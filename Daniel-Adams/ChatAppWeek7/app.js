@@ -4,6 +4,7 @@ module.exports = function (deps) {
   const mongoose = require('mongoose')
   const morgan = require('morgan')
   const AuthController = require('./controllers/auth')
+  const MessageController = require('./controllers/message')
 
   const app = express()
 
@@ -13,6 +14,7 @@ module.exports = function (deps) {
   app.use(morgan('tiny'))
 
   app.use('/', AuthController)
+  app.use('/', MessageController)
 
   app.get('/messages', (req, res) => {
     fs.readFile(deps.messagesPath, 'utf8', (err, text) => {

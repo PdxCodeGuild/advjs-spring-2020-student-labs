@@ -31,7 +31,6 @@ class App extends React.Component {
 
   componentDidMount () {
     socket.on('chat message', msg => {
-      console.log('Got a message:', msg)
       this.setState({ messages: this.state.messages.concat(msg) })
     })
 

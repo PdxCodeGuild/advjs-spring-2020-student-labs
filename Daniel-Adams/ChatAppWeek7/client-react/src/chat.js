@@ -1,25 +1,30 @@
 import React from 'react'
 import io from 'socket.io-client'
 import { withRouter } from 'react-router'
+// import { response } from 'express'
 
 const socket = io()
 
 function Message (props) {
-  return <li className='message-item'>
-    <span className='date'>{(new Date(props.message.date)).toLocaleString()}</span>
-    <span className='nick'> {props.message.username}: </span>
-    <span className='text'>{props.message.text}</span>
-         </li>
+  return (
+    <li className='message-item'>
+      <span className='date'>{(new Date(props.message.date)).toLocaleString()}</span>
+      <span className='nick'> {props.message.username}: </span>
+      <span className='text'>{props.message.text}</span>
+    </li>
+  )
 }
 
 class Chat extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      username: this.props.username,
       form: '',
       messages: this.props.messages,
       formValue: '',
-      room: ''
+      room: '',
+      token: this.props.token
     }
   }
 
@@ -30,7 +35,18 @@ class Chat extends React.Component {
 
   sendMessage (evt) {
     evt.preventDefault()
-    const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date() }
+    const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date(), token: this.props.token }
+
+    fetch('/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: message
+      })
+    })
+      .then(response => response.json()) // do we need a response?
 
     socket.emit('chat message', message)
   }
@@ -47,7 +63,7 @@ class Chat extends React.Component {
           {this.props.messages.filter(msg => msg.room === this.state.room).map((msg, i) => <Message message={msg} key={i} />)}
         </ul>
         <form id='send-message' onSubmit={this.sendMessage.bind(this)}>
-          <input id='message-text' type='text' placeholder='message...' value={this.formValue} onChange={this.handleChangeFormInput.bind(this)} />
+          <span><b>{this.state.username}</b>: </span><input id='message-text' type='text' placeholder='message...' value={this.formValue} onChange={this.handleChangeFormInput.bind(this)} />
           <button type='submit'>Send</button>
         </form>
       </div>
