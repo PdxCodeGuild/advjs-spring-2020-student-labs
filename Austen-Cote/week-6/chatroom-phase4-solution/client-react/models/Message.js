@@ -15,6 +15,10 @@ const messageSchema = Schema({
     type: Date,
     required: true
   },
+  room: {
+    type: String,
+    require: true
+  },
   user: {
     type: ObjectId,
     required: true,

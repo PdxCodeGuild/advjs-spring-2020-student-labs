@@ -14,6 +14,7 @@ import {
   Redirect
 } from 'react-router-dom'
 
+const http = require('http')
 const socket = io()
 
 class App extends React.Component {
@@ -50,7 +51,6 @@ class App extends React.Component {
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
     console.log(username, 'this is the username')
-    this.setState({ username: username, password: password, loggedIn: true })
 
     fetch('/login', {
       method: 'POST',
@@ -58,23 +58,29 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
+        username: username,
+        password: password
       })
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data, 'this is the data after login')
-        this.setState({ token: data.token })
+        console.log(data)
+        this.setState({ token: data.token, username: data.username, loggedIn: true })
       })
+      .then(console.log(this.state, 'this is after the user logged in'))
+      // need to pass the token with this it is getting unauthorized
+      .then(fetch('/messages')
+        .then(response => response.json())
+        .then(data => {
+          console.log('fetched data from server')
+          this.setState({ messages: data })
+        }))
   }
 
   handleSignUp (evt) {
     evt.preventDefault()
     const username = document.getElementById('username').value
     const password = document.getElementById('password').value
-    console.log(username, 'this is the username')
-    this.setState({ username: username, password: password, loggedIn: true })
 
     fetch('/sign-up', {
       method: 'POST',
@@ -82,14 +88,13 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
+        username: username,
+        password: password
       })
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data, 'this is the data after login')
-        this.setState({ token: data.token })
+        this.setState({ token: data.token, username: data.username, loggedIn: true })
       })
   }
 
@@ -114,7 +119,7 @@ class App extends React.Component {
 
           <Switch>
             <Route path='/rooms/:room'>
-              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} />
+              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} token={this.state.token} />
             </Route>
             <Route path='/login'>
               <Home onHandle={this.handleLogin.bind(this)} />

@@ -10,7 +10,7 @@ const socket = io()
 function Message (props) {
   return <li className='message-item'>
     <span className='date'>{(new Date(props.message.date)).toLocaleString()}</span>
-    <span className='nick'> {props.message.nick}: </span>
+    <span className='nick'> {props.message.username}: </span>
     <span className='text'>{props.message.text}</span>
          </li>
 }
@@ -42,7 +42,7 @@ class Chat extends React.Component {
 
   sendMessage (evt) {
     evt.preventDefault()
-    const message = { text: this.state.formValue, nick: this.props.nick, room: this.state.room, date: new Date() }
+    const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date(), token: this.props.token }
     console.log(message, 'line46')
     socket.emit('chat message', message)
   }

@@ -5,6 +5,12 @@ const Message = require('../models/Message')
 const express = require('express')
 const router = express.Router()
 
+// (http)
+
+
+
+
+// provides a short authenticate to other get routes
 const authenticate = (req, res, next) => {
   const authorization = req.header('Authorization') || ''
   const [type, token] = authorization.split(' ')
@@ -24,30 +30,10 @@ const authenticate = (req, res, next) => {
   }
 }
 
-// router.get('/hello-protected', (req, res) => {
-//   const authorization = req.header('Authorization') || ''
-//   const [type, token] = authorization.split(' ')
-
-//   if (type === 'Bearer' && jwt.verify(token, 'CHANGEME!')) {
-//     const payload = jwt.decode(token, 'CHANGEME!')
-//     User.findOne({ _id: payload._id }, (err, user) => {
-//       if (err) return res.status(500).send(err)
-
-//       return res.send({ message: 'this is a secret message...' })
-//     })
-//   } else {
-//     res.status(401).send('Unauthorized')
-//   }
-// })
-
-
-
-
-
-
 router.get('/messages', [authenticate], (req, res) => {
   Message.find({}, (err, result) => {
     if (err) return res.status(500).send(err)
+    console.log(result)
 
     const messages = result
       .split('\n')
