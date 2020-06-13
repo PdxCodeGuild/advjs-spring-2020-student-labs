@@ -35,12 +35,12 @@ class App extends React.Component {
     })
 
     // Get initial list of messages
-    fetch('/messages')
-      .then(response => response.json())
-      .then(data => {
-        console.log('fetched data from server')
-        this.setState({ messages: data })
-      })
+    // fetch('/messages')
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log('fetched data from server')
+    //     this.setState({ messages: data })
+    //   })
   }
 
   handleLogin (evt) {
@@ -74,18 +74,15 @@ class App extends React.Component {
           loggedIn: true,
           token: data.token
         })
-        fetch('/', {
-          headers: {
-            Authorization: `Bearer ${data.token}`
-          }
-        })
-          .then(response => response.json())
-          .then(data => console.log(data))
       })
   }
 
   handleLogOut () {
     this.setState({ loggedIn: false, username: '' })
+  }
+
+  sendMessage (message) {
+    socket.emit('chat message', message)
   }
 
   getRooms () {
@@ -111,6 +108,7 @@ class App extends React.Component {
                 formValue={this.state.formValue}
                 username={this.state.username}
                 token={this.state.token}
+                sendMessage={this.sendMessage.bind(this)}
               />
             </Route>
             <Route path='/login'>

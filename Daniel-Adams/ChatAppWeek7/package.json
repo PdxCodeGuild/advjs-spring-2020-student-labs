@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npx tape test.js | npx tap-spec",
-    "watch-server": "npx nodemon index.js",
+    "watch-server": "npx nodemon app.js",
     "watch-client": "npx watchify client/main.js -o static/bundle.js --debug --verbose"
   },
   "author": "",

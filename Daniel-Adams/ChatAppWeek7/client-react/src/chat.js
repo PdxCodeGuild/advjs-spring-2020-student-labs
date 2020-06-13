@@ -1,9 +1,7 @@
+/* globals fetch prompt */
 import React from 'react'
-import io from 'socket.io-client'
 import { withRouter } from 'react-router'
 // import { response } from 'express'
-
-const socket = io()
 
 function Message (props) {
   return (
@@ -36,19 +34,18 @@ class Chat extends React.Component {
   sendMessage (evt) {
     evt.preventDefault()
     const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date(), token: this.props.token }
-
-    fetch('/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: message
-      })
-    })
-      .then(response => response.json()) // do we need a response?
-
-    socket.emit('chat message', message)
+    console.log('trying to send a message')
+    this.props.sendMessage(message)
+    // fetch('/messages', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     message: message
+    //   })
+    // })
+    //   .then(response => response.json()) // do we need a response?
   }
 
   handleChangeFormInput (evt) {

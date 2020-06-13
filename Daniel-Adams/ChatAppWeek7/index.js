@@ -1,8 +1,6 @@
-const port = 8000
-const MESSAGES_PATH = './messages.txt'
+// const port = 8000
+// const app = require('./app')
 
-const app = require('./app')({ messagesPath: MESSAGES_PATH })
+// app.listen(port)
 
-app.listen(port)
-
-console.log('server listening on port:', port)
+// console.log('server listening on port:', port)
