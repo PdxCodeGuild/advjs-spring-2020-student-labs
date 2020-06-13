@@ -38,12 +38,6 @@ class App extends React.Component {
     })
 
     // Get initial list of messages
-    fetch('/messages')
-      .then(response => response.json())
-      .then(data => {
-        console.log('fetched data from server')
-        this.setState({ messages: data })
-      })
   }
 
   handleLogin (evt) {
@@ -64,17 +58,22 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        this.setState({ token: data.token, username: data.username, loggedIn: true })
+        // console.log(data)
+        this.setState({ token: data.token, username: data.username, loggedIn: true }, () => {
+          console.log(this.state, 'this is the states username')
+          fetch('/messages', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${this.state.token}`
+            }
+          })
+            .then(response => response.json())
+            .then(data => this.setState({ messages: data }))
+        }
+        )
       })
-      .then(console.log(this.state, 'this is after the user logged in'))
       // need to pass the token with this it is getting unauthorized
-      .then(fetch('/messages')
-        .then(response => response.json())
-        .then(data => {
-          console.log('fetched data from server')
-          this.setState({ messages: data })
-        }))
   }
 
   handleSignUp (evt) {
@@ -95,11 +94,16 @@ class App extends React.Component {
       .then(response => response.json())
       .then(data => {
         this.setState({ token: data.token, username: data.username, loggedIn: true })
+        console.log(this.state)
       })
   }
 
   handleLogOut () {
     this.setState({ loggedIn: false, username: '' })
+  }
+
+  handleSubmit (message) {
+    socket.emit('chat message', message)
   }
 
   getRooms () {
@@ -119,7 +123,7 @@ class App extends React.Component {
 
           <Switch>
             <Route path='/rooms/:room'>
-              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} token={this.state.token} />
+              <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} token={this.state.token} handleSubmit={this.handleSubmit.bind(this)} />
             </Route>
             <Route path='/login'>
               <Home onHandle={this.handleLogin.bind(this)} />
@@ -149,5 +153,6 @@ class App extends React.Component {
 }
 
 export default App
+
 
 

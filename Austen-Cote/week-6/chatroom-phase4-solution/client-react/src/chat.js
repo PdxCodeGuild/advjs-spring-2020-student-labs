@@ -1,11 +1,10 @@
 import React from 'react'
-import io from 'socket.io-client'
+import socket from 'socket.io-client'
 // import {
 //   useParams
 // } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
-const socket = io()
 
 function Message (props) {
   return <li className='message-item'>
@@ -44,7 +43,8 @@ class Chat extends React.Component {
     evt.preventDefault()
     const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date(), token: this.props.token }
     console.log(message, 'line46')
-    socket.emit('chat message', message)
+    this.props.handleSubmit(message)
+    
   }
 
   handleChangeFormInput (evt) {

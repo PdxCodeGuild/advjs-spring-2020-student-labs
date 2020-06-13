@@ -35,12 +35,7 @@ router.get('/messages', [authenticate], (req, res) => {
     if (err) return res.status(500).send(err)
     console.log(result)
 
-    const messages = result
-      .split('\n')
-      .filter(txt => txt) // will filter out empty string
-      .map(JSON.parse)
-
-    return res.json(messages)
+    return res.json(result)
   })
 })
 
