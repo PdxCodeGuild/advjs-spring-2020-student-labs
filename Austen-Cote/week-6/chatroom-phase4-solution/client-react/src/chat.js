@@ -9,7 +9,7 @@ import { withRouter } from 'react-router'
 function Message (props) {
   return <li className='message-item'>
     <span className='date'>{(new Date(props.message.date)).toLocaleString()}</span>
-    <span className='nick'> {props.message.username}: </span>
+    <span className='nick'> {props.message.user.username}: </span>
     <span className='text'>{props.message.text}</span>
          </li>
 }

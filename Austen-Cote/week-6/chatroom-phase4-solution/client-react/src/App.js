@@ -26,7 +26,6 @@ class App extends React.Component {
       formValue: '',
       loggedIn: false,
       username: '',
-      password: '',
       token: ''
     }
   }
@@ -69,7 +68,7 @@ class App extends React.Component {
             }
           })
             .then(response => response.json())
-            .then(data => this.setState({ messages: data }))
+            .then(data => this.setState({ messages: data }, () => { console.log(data, 'this is the data we are getting on login') }))
         }
         )
       })
@@ -99,7 +98,14 @@ class App extends React.Component {
   }
 
   handleLogOut () {
-    this.setState({ loggedIn: false, username: '' })
+    this.setState({
+      loggedIn: false,
+      username: '',
+      messages: [],
+      room: '',
+      formValue: '',
+      token: ''
+    })
   }
 
   handleSubmit (message) {
@@ -118,7 +124,7 @@ class App extends React.Component {
       <Router>
         <div>
           <nav>
-            {this.state.loggedIn ? <ul><li><Link to='/'>Back</Link></li><li onClick={this.handleLogOut.bind(this)}><Link to='/logout'>Logout</Link></li></ul> : <ul><li><Link to='/'>Home</Link></li><li><Link to='/login'>Login</Link></li><li><Link to='/signup'>Signup</Link></li></ul>}
+            {this.state.loggedIn ? <div><span className='linkTo'><Link to='/'>Back</Link></span><span className='linkTo' onClick={this.handleLogOut.bind(this)}><Link to='/logout'>Logout</Link></span></div> : <div><span className='linkTo'><Link to='/'>Home</Link></span><span className='linkTo'><Link to='/login'>Login</Link></span><span className='linkTo'><Link to='/signup'>Signup</Link></span></div>}
           </nav>
 
           <Switch>
@@ -138,12 +144,12 @@ class App extends React.Component {
               {this.state.loggedIn ? <Redirect to='/' /> : null}
             </Route>
             <Route path='/'>
-              <Rooms
+              {this.state.loggedIn ? <Rooms
                 loggedIn={this.state.loggedIn}
                 username={this.state.username}
                 room={this.state.room}
-                rooms={this.getRooms()}
-              />
+                rooms={this.getRooms()} /> : <h1>Please log in.</h1>}
+      
             </Route>
           </Switch>
         </div>

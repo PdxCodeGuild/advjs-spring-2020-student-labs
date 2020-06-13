@@ -19,8 +19,8 @@ export default function Rooms (props) {
   return <div id='rooms'>
     {props.loggedIn? <h1>Hi {props.username}!</h1>: <h1>Please log in.</h1>}
     
-    <button onClick={handleAddRoom}>Add Room</button>
-    <label htmlFor='room-select'>Change Room:</label>
+    <button onClick={handleAddRoom}>Add Room</button><br></br>
+    <label htmlFor='room-select'>Change Room: </label>
     <select onChange={handleChangeRoom} name='room' id='room-select' value={props.room}>
       <option value=''>--Select a Room--</option>
       {props.rooms.map(room => <option key={room} value={room}>{room}</option>)}
