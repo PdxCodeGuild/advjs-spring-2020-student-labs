@@ -3,6 +3,7 @@ const User = require('../models/User')
 const Message = require('../models/Message')
 
 const express = require('express')
+const { db } = require('../models/User')
 const router = express.Router()
 
 // provides a short authenticate to other get routes
@@ -46,6 +47,17 @@ router.post('/messages', [authenticate], (req, res) => {
   message.save()
 
   return res.status(201).send(message, 'post successful')
+})
+
+router.delete('/messages', [authenticate], (req, res) => {
+  const message = req.body
+  Message.deleteOne(message, (err, result) => {
+    if (err) return res.status(500).send(err)
+    console.log('message deleted')
+    message.close()
+  })
+  // const message = Message.deleteOne(req.body.text)
+  res.send(console.log(req.body, 'this is the delete section'))
 })
 
 module.exports = router

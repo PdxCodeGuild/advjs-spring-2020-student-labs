@@ -136,6 +136,35 @@ class App extends React.Component {
     socket.emit('chat message', message)
   }
 
+  handleDelete (delContent) {
+    // socket.emit('del message', delContent)
+
+    console.log(delContent, 'this is del content line 140')
+    fetch('/messages', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.state.token}`
+      },
+      body:
+        JSON.stringify(delContent)
+    })
+      .then(response => console.log(response))
+    fetch('/messages', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.state.token}`
+      }
+    })
+      .then(response => response.json())
+      // Once the "GET" request runs handle the promise by setting the state with the messages that come back
+      .then(data => this.setState({ messages: data }, () => { console.log(data, 'this is the data we are getting on delete') }))
+    // Once the "GET" request runs handle the promise by setting the state with the messages that come back
+    // .then(data => console.log(data))
+    // .then(data => this.setState({ messages: data }, () => { console.log(data, 'this is the data we are getting on login') }))
+  }
+
   // This gets the rooms and filters out duplicates for the select feture in the rooms component
   getRooms () {
     const rooms = this.state.messages.map(msg => msg.room)
@@ -160,7 +189,7 @@ class App extends React.Component {
           <div id='main-wrap'>
             <Switch>
               <Route path='/rooms/:room'>
-                <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} token={this.state.token} handleSubmit={this.handleSubmit.bind(this)} />
+                <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} token={this.state.token} handleSubmit={this.handleSubmit.bind(this)} handleDelete={this.handleDelete.bind(this)} />
               </Route>
               <Route path='/login'>
                 <h1>Login</h1>

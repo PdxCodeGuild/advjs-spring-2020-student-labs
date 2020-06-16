@@ -17,10 +17,12 @@ router.post('/sign-up', (req, res) => {
 
     // after you handle the checks call the sign up method that is within the user model with the users username and password and once you do use the sanitize method within the user model
     const userToken = await userSetup()
-    
+
+    // Call this function using async and have the await be the user sign up that way you do not send a unidetified or null object
     async function userSetup () {
       const user = await User.signUp(req.body.username, req.body.password)
 
+      // create a token utilizing the jwt.sign()
       const token = jwt.sign({
         _id: user._id
       }, 'CHANGEME!')
@@ -33,10 +35,9 @@ router.post('/sign-up', (req, res) => {
 
       return returnObj
     }
-    console.log(userToken, 'this is the user token')
+    console.log('login finished')
+    // send the toke and username to the client side
     res.status(201).send(userToken)
-    // make a token using jwt.sgin()
-    // res.status(201).send({ user: user.sanitize(), token: token })
   })
 })
 

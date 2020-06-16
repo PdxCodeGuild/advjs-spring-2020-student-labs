@@ -14,7 +14,7 @@ const http = require('http').createServer(app)
 const io = require('socket.io')(http)
 
 io.on('connection', socketController(io))
-// Make sure it RETURNS a function 
+// Make sure it RETURNS a function
 
 const port = 8000
 // const MESSAGES_PATH = './messages.txt'

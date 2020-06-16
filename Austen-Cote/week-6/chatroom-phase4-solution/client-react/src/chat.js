@@ -11,6 +11,7 @@ function Message (props) {
     <span className='date'>{(new Date(props.message.date)).toLocaleString()}</span>
     <span className='nick'> {props.message.user.username}: </span>
     <span className='text'>{props.message.text}</span>
+    <span className='del'><button onClick={() => props.del(props.message)}>Delete</button></span>
          </li>
 }
 
@@ -36,9 +37,7 @@ class Chat extends React.Component {
   sendMessage (evt) {
     evt.preventDefault()
     // get the context of each message and send the object based on the stat and forms value
-    console.log(this.props.username, 'this is the username')
     const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date(), token: this.props.token }
-    console.log(message, 'line46')
 
     // call the handleSubmit function that is passed from App.js
     this.props.handleSubmit(message)
@@ -49,13 +48,20 @@ class Chat extends React.Component {
     this.setState({ formValue: evt.target.value })
   }
 
+  deleteMessage (evt) {
+    console.log(evt)
+    const delContent = { text: evt.text, user: evt.user._id }
+    console.log(delContent, 'this is del content line 54')
+    this.props.handleDelete(delContent)
+  }
+
   // A Class calls a render and a return of jsx, here we filter out the messages acording to the selected room and pass the props to the function component above that makes the layout of message
   render () {
     return (
       <div id='chatroom'>
         <h1>{this.state.room}</h1>
         <ul id='messages'>
-          {this.props.messages.filter(msg => msg.room === this.state.room).map((msg, i) => <Message message={msg} key={i} />)}
+          {this.props.messages.filter(msg => msg.room === this.state.room).map((msg, i) => <Message message={msg} key={i} del={this.deleteMessage.bind(this)} />)}
         </ul>
         <form id='send-message' onSubmit={this.sendMessage.bind(this)}>
           <input id='message-text' type='text' placeholder='message...' value={this.formValue} onChange={this.handleChangeFormInput.bind(this)} />
