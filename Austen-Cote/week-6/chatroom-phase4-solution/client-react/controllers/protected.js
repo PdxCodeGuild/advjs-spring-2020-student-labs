@@ -25,16 +25,24 @@ const authenticate = (req, res, next) => {
   }
 }
 
+// Handle the "GET" request to /messages and send authenticate function created above to handle the authentication
 router.get('/messages', [authenticate], (req, res) => {
+  // Use the Message model with the mongoose find all syntax to populate a user and that gives us a username insted of a object _id
   Message.find({}).populate('user', 'username').exec((err, result) => {
     if (err) return res.status(500).send(err)
     console.log(result)
+    // send up the json results of the find this is going to be a message and the username will be a name and a user _id making it easier to parse later
     return res.json(result)
   })
 })
 
+// Handle the "POST" request with the authenicate function passed
 router.post('/messages', [authenticate], (req, res) => {
+
+  // set message to the Message model and run the post message function within the message schema
   const message = Message.postMessage(req.body.text, req.body.date, req.body.user)
+
+  // run message.save() in order to save the message to the database
   message.save()
 
   return res.status(201).send(message, 'post successful')
@@ -88,4 +96,3 @@ module.exports = router
 //       return res.send('OK')
 //     })
 //   })
-

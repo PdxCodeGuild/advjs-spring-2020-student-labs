@@ -1,5 +1,6 @@
 import React from 'react'
 
+// This is a functional component for sign up, it returns jsx for the Sign up page
 export default function Signup (props) {
   return <div id='chatroom'>
     <h1>Welcome</h1>
