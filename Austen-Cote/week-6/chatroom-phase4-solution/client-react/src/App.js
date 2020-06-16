@@ -101,7 +101,18 @@ class App extends React.Component {
     })
       .then(response => response.json())
       .then(data => {
-        this.setState({ token: data.token, username: data.username, loggedIn: true })
+        this.setState({ token: data.token, username: data.username, loggedIn: true }, () => {
+          fetch('/messages', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${this.state.token}`
+            }
+          })
+            .then(response => response.json())
+            // Once the "GET" request runs handle the promise by setting the state with the messages that come back
+            .then(data => this.setState({ messages: data }, () => { console.log(data, 'this is the data we are getting on login') }))
+        })
         console.log(this.state)
       })
   }
@@ -152,18 +163,22 @@ class App extends React.Component {
                 <Chat messages={this.state.messages} room={this.state.room} formValue={this.state.formValue} username={this.state.username} token={this.state.token} handleSubmit={this.handleSubmit.bind(this)} />
               </Route>
               <Route path='/login'>
+                <h1>Login</h1>
                 <Home onHandle={this.handleLogin.bind(this)} />
                 {this.state.loggedIn ? <Redirect to='/' /> : null}
               </Route>
               <Route path='/logout'>
+                <h1>Logged Out</h1>
                 {/* <LoggedOut onHandle = {this.handleLogOut.bind(this)} /> */}
                 <LoggedOut />
               </Route>
               <Route path='/signup'>
+                <h1>Sign-Up</h1>
                 <Signup onHandle={this.handleSignUp.bind(this)} />
                 {this.state.loggedIn ? <Redirect to='/login' /> : null}
               </Route>
               <Route path='/'>
+                <h1>Welcome to the Project Chat Homepage</h1>
                 {this.state.loggedIn ? <Rooms
                   loggedIn={this.state.loggedIn}
                   username={this.state.username}

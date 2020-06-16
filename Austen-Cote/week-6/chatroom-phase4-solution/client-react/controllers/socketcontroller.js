@@ -15,7 +15,7 @@ function socketController (io) {
         }
 
         const payload = jwt.decode(msg.token, 'CHANGEME!')
-
+        console.log(payload._id, 'this is the payload')
         // From the User model use the mongoose findOne syntax and get the user id
         User.findOne({ _id: payload._id }, async (err, userDoc) => {
           if (err) return console.error(err)
@@ -28,6 +28,7 @@ function socketController (io) {
           message.room = msg.room
 
           // save the message
+          console.log(message.user, 'this is message.user')
           await message.save()
 
           console.log('about to emit chat')

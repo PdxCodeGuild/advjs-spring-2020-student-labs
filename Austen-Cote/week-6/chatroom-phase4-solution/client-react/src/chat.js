@@ -36,6 +36,7 @@ class Chat extends React.Component {
   sendMessage (evt) {
     evt.preventDefault()
     // get the context of each message and send the object based on the stat and forms value
+    console.log(this.props.username, 'this is the username')
     const message = { text: this.state.formValue, username: this.props.username, room: this.state.room, date: new Date(), token: this.props.token }
     console.log(message, 'line46')
 

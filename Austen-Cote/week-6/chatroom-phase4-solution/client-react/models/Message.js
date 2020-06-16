@@ -37,6 +37,7 @@ messageSchema.statics.postMessage = async function (text, date, user) {
   return message
 }
 
+// initialize the message model by saying "Message" and the thing within the quotes is what you call thoughout the app to use this model "reference"
 const Message = mongoose.model('Message', messageSchema)
 
 module.exports = Message

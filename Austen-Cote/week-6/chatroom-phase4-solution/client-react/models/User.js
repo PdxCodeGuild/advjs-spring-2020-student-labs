@@ -40,6 +40,7 @@ userSchema.methods.comparePassword = function (plainText) {
   return bcrypt.compareSync(plainText, this.password)
 }
 
+// initialize the message model by saying "User" and the thing within the quotes is what you call thoughout the app to use this model "reference"
 const User = mongoose.model('User', userSchema)
 
 module.exports = User

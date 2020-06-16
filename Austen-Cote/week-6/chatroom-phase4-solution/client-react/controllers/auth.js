@@ -16,8 +16,27 @@ router.post('/sign-up', (req, res) => {
     if (userExists) return res.status(400).send('username already exists')
 
     // after you handle the checks call the sign up method that is within the user model with the users username and password and once you do use the sanitize method within the user model
-    const user = await User.signUp(req.body.username, req.body.password)
-    res.status(201).send(user.sanitize())
+    const userToken = await userSetup()
+    
+    async function userSetup () {
+      const user = await User.signUp(req.body.username, req.body.password)
+
+      const token = jwt.sign({
+        _id: user._id
+      }, 'CHANGEME!')
+
+      console.log(token, 'this is token')
+      const returnObj = {
+        username: req.body.username,
+        token: token
+      }
+
+      return returnObj
+    }
+    console.log(userToken, 'this is the user token')
+    res.status(201).send(userToken)
+    // make a token using jwt.sgin()
+    // res.status(201).send({ user: user.sanitize(), token: token })
   })
 })
 
@@ -30,6 +49,7 @@ router.post('/login', (req, res) => {
     if (err) return res.status(500).send(err)
 
     // compare the username and password and check for errors
+    console.log(req.body.password, 'this is line 33')
     if (!user || !user.comparePassword(req.body.password)) return res.status(400).send('Invalid login information')
 
     // make a token using jwt.sgin()
