@@ -4,11 +4,12 @@ import React from 'react'
 export default function Signup (props) {
   return <div id='chatroom'>
     <form onSubmit={props.onHandle}>
-      <label>Username:</label>
-      <input type='text' id='username' /><br />
+    <label>Username:</label>
+      <input type='text' id='username' /><br /><br />
       <label>Password:</label>
       <input type='password' id='password' />
-      <input type='submit' value='submit' key='submit' />
+      <br /><br />
+      <input type='submit' value='submit' key='submit' id='submitButton' />
     </form>
   </div>
 }

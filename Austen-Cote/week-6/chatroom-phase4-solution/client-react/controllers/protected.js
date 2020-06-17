@@ -11,9 +11,9 @@ const authenticate = (req, res, next) => {
   const authorization = req.header('Authorization') || ''
   const [type, token] = authorization.split(' ')
   try {
-    if (type === 'Bearer' && jwt.verify(token, 'CHANGEME!')) {
+    if (type === 'Bearer' && jwt.verify(token, 'CHANGEME!')) { // change for depoyment
       const payload = jwt.decode(token, 'CHANGEME!')
-      User.findOne({ _id: payload._id }, (err, userDoc) => {
+      User.findOne({ _id: payload._id }, (err, userDoc) => { // change for deployment
         if (err) return res.status(500).send(err)
         req.user = userDoc
         return next()
@@ -54,9 +54,7 @@ router.delete('/messages', [authenticate], (req, res) => {
   Message.deleteOne(message, (err, result) => {
     if (err) return res.status(500).send(err)
     console.log('message deleted')
-    message.close()
   })
-  // const message = Message.deleteOne(req.body.text)
   res.send(console.log(req.body, 'this is the delete section'))
 })
 

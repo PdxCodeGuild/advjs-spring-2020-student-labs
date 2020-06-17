@@ -39,19 +39,65 @@ background: cornflowerblue;
 border: 2px black solid;
 }
 
+button {
+  border-radius: 10px;
+  margin: 3px;
+  padding: 8px;
+}
+
+#room-select {
+  padding: 8px;
+  border-radius: 10px;
+}
+
+nav button {
+  border-radius: 10px;
+  margin: 3px;
+  padding: 8px;
+}
+
 label {
   float: left;
-  width: 30%;
+  width: 15%;
 }
 
 input#username {
-  float: right;
-  width: 60%;
+  float: left;
+  width: 40%;
 }
 
 input#password {
-  float: right;
-  width: 60%;
+  float: left;
+  width: 40%;
+}
+
+input#submitButton {
+  width: 6em;
+  height: 4em;
+  border-radius: 8px;
+}
+
+input#message-text {
+  width: 90%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 5px;
+}
+
+input[type="text"] {
+  height: 30px;
+  border-radius: 10px;
+}
+
+input[type="password"] {
+  height: 30px;
+}
+
+#chatbox {
+  background-color: lightgreen;
+  color: black;
+  border-radius: 20px;
+  border: 2px black solid;
 }
 
 .text {

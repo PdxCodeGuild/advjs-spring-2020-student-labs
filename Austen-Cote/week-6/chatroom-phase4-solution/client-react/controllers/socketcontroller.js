@@ -42,27 +42,6 @@ function socketController (io) {
         return console.error(err)
       }
     })
-    socket.on('del message', (msg) => {
-      try {
-        if (!jwt.verify(msg.token, 'CHANGEME!')) {
-          return console.log('Not authorized')
-        }
-
-        const payload = jwt.decode(msg.token, 'CHANGEME!')
-        // From the User model use the mongoose findOne syntax and get the user id
-        Message.deleteOne(msg, async (err, result) => {
-          if (err) return console.log(err)
-          console.log('message deleted')
-          await db.close()
-        })
-
-        console.log('about to emit chat')
-
-        // use the emit to send everything inside message and change the token to undefined so the user can not see the token
-      } catch (err) {
-        return console.error(err)
-      }
-    })
     socket.on('disconnect', () => {
       console.log('user disconnected')
     })

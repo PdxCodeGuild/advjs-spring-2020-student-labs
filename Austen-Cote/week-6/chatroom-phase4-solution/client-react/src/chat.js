@@ -10,8 +10,8 @@ function Message (props) {
   return <li className='message-item'>
     <span className='date'>{(new Date(props.message.date)).toLocaleString()}</span>
     <span className='nick'> {props.message.user.username}: </span>
-    <span className='text'>{props.message.text}</span>
-    <span className='del'><button onClick={() => props.del(props.message)}>Delete</button></span>
+    <span className='text'>{props.message.text} </span>
+    {props.message.user.username === props.username ? <span className='del'><button onClick={() => props.del(props.message)}>Delete</button></span> : null}
          </li>
 }
 
@@ -60,9 +60,11 @@ class Chat extends React.Component {
     return (
       <div id='chatroom'>
         <h1>{this.state.room}</h1>
+        <div id='chatbox'>
         <ul id='messages'>
-          {this.props.messages.filter(msg => msg.room === this.state.room).map((msg, i) => <Message message={msg} key={i} del={this.deleteMessage.bind(this)} />)}
+          {this.props.messages.filter(msg => msg.room === this.state.room).map((msg, i) => <Message message={msg} key={i} del={this.deleteMessage.bind(this)} username={this.props.username} />)}
         </ul>
+        </div><br />
         <form id='send-message' onSubmit={this.sendMessage.bind(this)}>
           <input id='message-text' type='text' placeholder='message...' value={this.formValue} onChange={this.handleChangeFormInput.bind(this)} />
           <button type='submit'>Send</button>

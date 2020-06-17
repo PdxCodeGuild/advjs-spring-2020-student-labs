@@ -137,7 +137,6 @@ class App extends React.Component {
   }
 
   handleDelete (delContent) {
-    // socket.emit('del message', delContent)
 
     console.log(delContent, 'this is del content line 140')
     fetch('/messages', {
@@ -160,9 +159,6 @@ class App extends React.Component {
       .then(response => response.json())
       // Once the "GET" request runs handle the promise by setting the state with the messages that come back
       .then(data => this.setState({ messages: data }, () => { console.log(data, 'this is the data we are getting on delete') }))
-    // Once the "GET" request runs handle the promise by setting the state with the messages that come back
-    // .then(data => console.log(data))
-    // .then(data => this.setState({ messages: data }, () => { console.log(data, 'this is the data we are getting on login') }))
   }
 
   // This gets the rooms and filters out duplicates for the select feture in the rooms component

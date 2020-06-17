@@ -57,6 +57,7 @@ router.post('/login', (req, res) => {
     const token = jwt.sign({
       _id: user._id
     }, 'CHANGEME!')
+    // chnage this CHANGEME before deployment put this in a secrets.js and make sure it is in gitignore
     console.log(token, user.username)
     // send the toke and username to the client side
     res.send({ token, username: user.username })
