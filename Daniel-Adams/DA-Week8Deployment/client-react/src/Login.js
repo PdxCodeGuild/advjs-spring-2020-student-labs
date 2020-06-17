@@ -44,11 +44,17 @@ class LoginForm extends React.Component {
 
   render () {
     return (
-      <div>
-        <form id='login-form' onSubmit={this.handleSubmit.bind(this)}>
-          <input id='username' type='text' placeholder='username...' value={this.state.username} onChange={this.handleChangeUsername.bind(this)} />
-          <input id='password' type='password' placeholder='password...' value={this.state.password} onChange={this.handleChangePassword.bind(this)} />
-          <button type='submit'>Log in</button>
+      <div className='w-full max-w-xs'>
+        <form className='bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4' id='login-form' onSubmit={this.handleSubmit.bind(this)}>
+          <div className='mb-4'>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='username' type='text' placeholder='username...' value={this.state.username} onChange={this.handleChangeUsername.bind(this)} />
+          </div>
+          <div className='mb-6'>
+            <input className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline' id='password' type='password' placeholder='password...' value={this.state.password} onChange={this.handleChangePassword.bind(this)} />
+          </div>
+          <div className='items-center'>
+            <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline' type='submit'>Log in</button>
+          </div>
         </form>
 
         <div className='login-signup-redirect'>
