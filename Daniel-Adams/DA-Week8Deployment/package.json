@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch-server": "npx nodemon index.js"
+    "start": "node index.js",
+    "build": "cd client-react && npm run build",
+    "install-client": "cd client-react && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "author": "",
   "license": "ISC",
